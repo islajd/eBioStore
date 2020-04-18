@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('phone_number');
-            $table->string('address');
+            $table->string('phone_number')->nullable();
+            $table->string('address')->nullable();
             $table->integer('role_id')->unsigned()->default(1); // 1 Should Be User_Role_Id
             $table->foreign('role_id')->references('id')->on('roles');
             $table->rememberToken();
