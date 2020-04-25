@@ -71,10 +71,12 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
-            @extends('auth.register')
-            @extends('auth.login')
-        </div>
+        @guest
+            <div class="container">
+                @extends('auth.register')
+                @extends('auth.login')
+            </div>
+        @endguest
         <main class="py-4">
             @yield('content')
             @if ($errors->any())
