@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('cart')
+    <p class="h1">Cart</p>
     @if (session('status'))
         <div class="alert alert-danger" role="alert">
             {{ session('status') }}
