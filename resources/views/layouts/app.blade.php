@@ -71,162 +71,17 @@
                 </div>
             </div>
         </nav>
-
-
         <div class="container">
-            <div class="row justify-content-center modal fade" id="modalLoginForm" tabindex="-1" role="dialog">
-                <div class="col-md-4 modal-dialog" role="document">
-                    <div class="card modal-content">
-                        <div class="modal-header">{{ __('Login') }}</div>
-
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 input-group">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('E-Mail Address') }}" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                        @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 input-group">
-                                        <input id="password" type="password" placeholder="{{ __('Password') }}" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-10 d-flex">
-                                        <div class="col-md-5 offset-md-1 align-items-center d-flex justify-content-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="remember">
-                                                    {{ __('Remember Me') }}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-7 offset-md-1">
-                                            @if (Route::has('password.request'))
-                                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                    {{ __('Forgot Your Password?') }}
-                                                </a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-0 pb-1">
-                                    <div class="col-md-10 offset-md-1">
-                                        <button type="submit" class="btn btn-block btn-primary">
-                                            {{ __('Login') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center modal fade" id="modalRegisterForm" tabindex="-1" role="dialog">
-                <div class="col-md-4 modal-dialog" role="document">
-                    <div class="card modal-content">
-                        <div class="modal-header">{{ __('Register') }}</div>
-
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('register') }}">
-                                @csrf
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 input-group">
-                                        <input id="first_name" type="text" placeholder="{{"First Name"}}" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
-                                        @error('first_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 input-group">
-                                        <input id="last_name" type="text" placeholder="{{"Last Name"}}" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
-
-                                        @error('last_name')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 input-group">
-                                        <input id="email" type="email" placeholder="{{"Email"}}" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                        @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 input-group">
-                                        <input id="password" type="password" placeholder="{{"Password"}}" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 input-group">
-                                        <input id="password-confirm" type="password" placeholder="{{"Confirm Password"}}" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 input-group">
-                                        <input id="address" type="text" placeholder="{{"Address"}}" class="form-control" name="address" value="{{ old('address') }}" autocomplete="address" autofocus>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-10 offset-md-1 input-group">
-                                        <input id="phone_number" type="number" placeholder="{{"Phone Number"}}" class="form-control" name="phone_number" value="{{ old('phone_number') }}" autocomplete="phone_number" autofocus>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-0 pb-1">
-                                    <div class="col-md-10 offset-md-1">
-                                        <button type="submit" class="btn btn-block btn-primary">
-                                            {{ __('Register') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @extends('auth.register')
+            @extends('auth.login')
         </div>
-
         <main class="py-4">
             @yield('content')
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div>{{$error}}</div>
+                @endforeach
+            @endif
         </main>
     </div>
 </body>
