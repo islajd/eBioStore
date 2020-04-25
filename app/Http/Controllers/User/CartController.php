@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+
     public function addToCart(Request $request,$productId,$amount){
         try{
             $product = Product::findOrFail($productId);
@@ -45,37 +46,48 @@ class CartController extends Controller
             ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
                 'products.description as description','products.stock as stock','products.created_at as date',
                 'products.measurement_id as measurement_id','measurement_types.name as measurement_name',
-                'products.category_id as category_id','categories.name as category_name')
+                'products.category_id as category_id','categories.name as category_name',
+                'carts.amount as quantity')
             ->get();
-
-        return $products;
+        $total = 0;
+        foreach ($products as $product){
+            $total += ($product->price * $product->quantity);
+        }
+        return view('cart.cart')->with([
+            'products'=>$products,
+            'total'=>$total
+        ]);
     }
 
 
     public function emptyCart(){
         $userId = Auth::user()->id;
         $cart = Cart::where('user_id',$userId)->delete();
-        return $cart;
+        return redirect('getProductsAtCart')->with('status','Cart is Empty');
     }
 
     public function deleteProductAtCart($productId){
         $userId = Auth::user()->id;
         $cart = Cart::where(['user_id'=>$userId,'product_id'=>$productId])->delete();
-        return $cart;
+        return redirect('getProductsAtCart');
     }
 
-    public function changeAmount($productId,$newAmount){
+    public function changeAmount($productId,Request $request){
         try{
             $userId = Auth::user()->id;
             $product = Product::findOrFail($productId);
-            if($product->stock < $newAmount && $newAmount>0){
-                return 'You cannot buy more than stock';
+            $newAmount = $request->input('amount');
+            if($product->stock < $newAmount && $newAmount>0 ){
+                return redirect('getProductsAtCart')->with('status','You cannot buy more than stock');
+            }
+            if($newAmount<=0 ){
+                return redirect('getProductsAtCart')->with('status','Value Error');
             }
             $cart = Cart::where(['user_id'=>$userId,'product_id'=>$productId])->update(['amount'=>$newAmount]);
-            return $cart;
+            return redirect('getProductsAtCart');
         }
         catch (ModelNotFoundException $e){
-            return 'Product not found';
+            return redirect('getProductsAtCart')->with('status','Product Not Found');
         }
     }
 

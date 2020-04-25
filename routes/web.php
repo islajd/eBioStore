@@ -50,19 +50,26 @@ Route::group(['middleware' => ['auth','admin']],function(){
 });
 
 Route::group(['middleware' => ['auth']],function(){
-    // They Are 'Get' Just For Test :)
+    // Cart Routes
+    Route::get('/getProductsAtCart','User\CartController@getProductsAtCart'); // Get Cart Page
+    Route::post('/emptyCart','User\CartController@emptyCart');
+    Route::delete('/deleteProductAtCart/{productId}','User\CartController@deleteProductAtCart');
+    Route::post('/changeAmount/{productId}','User\CartController@changeAmount');
 
+    Route::get('/createOrderByCart','User\CartController@createOrder'); // Should Be After Checkout Page
+
+    // Should Be in Single Product Page To Add a Product To Cart
     Route::get('/addToCart/{productId}/{amount}','User\CartController@addToCart');
-    Route::get('/getProductsAtCart','User\CartController@getProductsAtCart');
-    Route::get('/emptyCart','User\CartController@emptyCart');
-    Route::get('/deleteProductAtCart/{productId}','User\CartController@deleteProductAtCart');
-    Route::get('/changeAmount/{productId}/{newAmount}','User\CartController@changeAmount');
-    Route::get('/createOrderByCart','User\CartController@createOrder');
 
+    // Create a Order For Single Product, We are not using it
     Route::get('/createOrder/{productId}/{quantity}','User\OrderController@createOrder');
+
+    // Get Orders And Details For An Order
     Route::get('/getMyOrders','User\OrderController@getOrders');
     Route::get('/getDetailsForMyOrder/{orderId}','User\OrderController@getDetailsForAnOrder');
 
+
+    // They Are Used For User Profile To Show User Profile,To Change Details and To Change Password
     Route::get('/getProfile','User\UserController@getProfile');
     Route::get('/changeDetails','User\UserController@changeDetails');
     Route::get('/changePassword/{old}/{new}/{conf}','User\UserController@changePassword');
