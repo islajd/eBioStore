@@ -10,7 +10,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">Image</th>
                 <th scope="col">Product Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
@@ -21,7 +21,7 @@
         <tbody>
         @foreach($products as $product)
         <tr>
-            <th scope="row">1</th>
+            <td><img src="{{storage_path('app\public\product_images')}}\{{$product->image}}"> </td>
             <td>{{$product->name}}</td>
             <td> <input type="number"  id="price" value="{{$product->price}}" hidden> {{$product->price}} LEK</td>
             <td>
