@@ -2,7 +2,6 @@
     <div class="col-md-4 modal-dialog" role="document">
         <div class="card modal-content">
             <div class="modal-header">{{ __('Register') }}</div>
-
             <div class="card-body">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
@@ -16,9 +15,7 @@
                             @enderror
                         </div>
                     </div>
-<div>
 
-</div>
                     <div class="form-group row">
                         <div class="col-md-10 offset-md-1 input-group">
                             <input id="last_name" type="text" placeholder="{{"Last Name"}}" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
