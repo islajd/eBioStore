@@ -118,12 +118,12 @@ class CartController extends Controller
                 foreach ($carts as $cart) {
                     $product = Product::findOrFail($cart->product_id);
                     if ($cart->amount > $product->stock || $cart->amount == 0) {
-                        return redirect('getProductsAtCart')->with('Order Not Completed');
+                        return redirect('getProductsAtCart')->with('status','Order Not Completed');
                     }
                 }
             }
             catch (ModelNotFoundException $e){
-                return redirect('getProductsAtCart')->with('Order Not Completed');
+                return redirect('getProductsAtCart')->with('status','Order Not Completed');
             }
 
             $userId = Auth::user()->id;
