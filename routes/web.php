@@ -55,8 +55,8 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('/emptyCart','User\CartController@emptyCart');
     Route::delete('/deleteProductAtCart/{productId}','User\CartController@deleteProductAtCart');
     Route::post('/changeAmount/{productId}','User\CartController@changeAmount');
-
-    Route::get('/createOrderByCart','User\CartController@createOrder'); // Should Be After Checkout Page
+    Route::get('/checkout','User\CartController@checkout');
+    Route::post('/createOrderByCart','User\CartController@createOrder'); // Should Be After Checkout Page
 
     // Should Be in Single Product Page To Add a Product To Cart
     Route::get('/addToCart/{productId}/{amount}','User\CartController@addToCart');

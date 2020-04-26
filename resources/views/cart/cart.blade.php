@@ -53,7 +53,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <form method="GET" action="#">
+                        <form method="GET" action="checkout">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-primary">Proceed To Checkout</button>
                         </form>

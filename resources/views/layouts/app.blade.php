@@ -100,6 +100,7 @@
             @yield('profile')
             @yield('order_details')
             @yield('support')
+            @yield('checkout')
         </main>
     </div>
 </body>

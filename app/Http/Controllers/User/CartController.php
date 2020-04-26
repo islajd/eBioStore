@@ -91,34 +91,48 @@ class CartController extends Controller
         }
     }
 
+    public function checkout(){
+        $userId = Auth::user()->id;
+        $products = DB::table('carts')
+            ->join('products','carts.product_id','=','products.id')
+            ->join('categories','products.category_id','=','categories.id')
+            ->join('measurement_types','products.measurement_id','=','measurement_types.id')
+            ->where('carts.user_id',$userId)
+            ->select('carts.amount as quantity','products.price as price')
+            ->get();
+        $total = 0;
+        foreach ($products as $product){
+            $total += ($product->price * $product->quantity);
+        }
+        return view('cart.checkout')->with('total',$total);
+    }
 
-    public function createOrder(){
+
+    public function createOrder(Request $request){
         $carts = $this->getCart();
         if(count($carts)==0){
-            echo "Card is Empty";
+            return redirect('getProductsAtCart')->with('status','Cart Empty');
         }
         else{
             try{
                 foreach ($carts as $cart) {
                     $product = Product::findOrFail($cart->product_id);
                     if ($cart->amount > $product->stock || $cart->amount == 0) {
-                        return "Order Not Completed";
+                        return redirect('getProductsAtCart')->with('Order Not Completed');
                     }
                 }
             }
             catch (ModelNotFoundException $e){
-                return "One Product Not Found";
+                return redirect('getProductsAtCart')->with('Order Not Completed');
             }
 
             $userId = Auth::user()->id;
             $order = new Order();
             $order->user_id = $userId;
             $order->date = now();
-            $userAddress = Auth::user()->address;
-            $order->address = $userAddress;
+            $order->status = 'NOT SEND';
+            $order->address = $request->input('address');
             $order->save();
-            echo 'Order: '.$order;
-
 
             foreach ($carts as $cart){
                 $order_detail = new Order_Details();
@@ -131,10 +145,9 @@ class CartController extends Controller
 
                 $product->stock -= $cart->amount;
                 $product->update();
-
-                echo 'Detail: '.$order_detail;
             }
             $this->emptyCart();
+            return redirect('getProfile')->with('status','Order Completed');
         }
     }
 
