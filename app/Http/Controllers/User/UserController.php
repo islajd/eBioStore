@@ -16,7 +16,11 @@ class UserController extends Controller
         try{
             $userId = Auth::user()->id;
             $user = User::findOrFail($userId);
-            return $user;
+            $orders = app(\App\Http\Controllers\User\OrderController::class)->getOrders();
+            return view('profile.profile')->with([
+                'user'=>$user,
+                'orders'=> $orders
+            ]);
         }
         catch (ModelNotFoundException $e){
             return 'User not found';
@@ -36,7 +40,7 @@ class UserController extends Controller
             $user->phone_number = $request->input('phone_number');
             $user->address = $request->input('address');
             $user->update();
-            return $user;
+            return redirect('getProfile')->with('status','Updated');
         }
         catch (ModelNotFoundException $e){
             return 'User not found';
@@ -46,37 +50,36 @@ class UserController extends Controller
         }
     }
 
-    public function changePassword(/*Request $request*/ $old,$new,$conf){
-        // Just For Test, password form should get by Input , uncomment this :)
-//        if(!$request->has(['old_password','new_password','confirm_password'])){
-//            return "Something went wrong";
-//        }
+    public function changePassword(Request $request){
+        if(!$request->has(['old_password','new_password','confirm_password'])){
+            return redirect('getProfile')->with('status','Something Went Wrong');
+        }
         try{
             $userId = Auth::user()->id;
             $user = User::findOrFail($userId);
-//            $old_password = $request->input('old_password');
-//            $new_password = $request->input('new_password');
-//            $confirm_password = $request->input('confirm_password');
-            $old_password = $old;
-            $new_password = $new;
-            $confirm_password = $conf;
+            $old_password = $request->input('old_password');
+            $new_password = $request->input('new_password');
+            $confirm_password = $request->input('confirm_password');
+            if($old_password==null || $new_password==null || $confirm_password==null){
+                return redirect('getProfile')->with('error','Please Complete Fields');
+            }
             if($new_password != $confirm_password){
-                return "New Password and Confirm Password not match";
+                return redirect('getProfile')->with('status','Password Not Match');
             }
             if(Hash::check($old_password,$user->password)){
                 $user->password = Hash::make($new_password);
                 $user->update();
-                return "Password Changed";
+                return redirect('getProfile')->with('status','Password Changed');
             }
             else{
-                return "Old password incorrect";
+                return redirect('getProfile')->with('error','Old Password Incorrect');
             }
         }
         catch (ModelNotFoundException $e){
-            return 'User not found';
+            return redirect('getProfile')->with('error','User Not Found');
         }
         catch (QueryException $e){
-            return 'Fields cannot be null';
+            return redirect('getProfile')->with('error','Fields Cannot Be Null');
         }
     }
 }

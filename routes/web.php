@@ -71,10 +71,16 @@ Route::group(['middleware' => ['auth']],function(){
 
     // They Are Used For User Profile To Show User Profile,To Change Details and To Change Password
     Route::get('/getProfile','User\UserController@getProfile');
-    Route::get('/changeDetails','User\UserController@changeDetails');
-    Route::get('/changePassword/{old}/{new}/{conf}','User\UserController@changePassword');
+    Route::post('/changeDetails','User\UserController@changeDetails');
+    Route::post('/changePassword','User\UserController@changePassword');
 });
 
 Route::get('/getProductsByCategory/{id}', 'Admin\ProductController@getProductsByCategory');
 
 
+// Support Mail Services
+Route::get('/support',function (){
+    return view('support.support');
+});
+
+Route::post('/sendSupportRequest','Guest\SupportController@sendRequest');

@@ -43,7 +43,7 @@
                             <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="/">Support</a>
+                            <a class="nav-link" href="support">Support</a>
                         </li>
                         @guest
                             <li class="nav-item">
@@ -63,7 +63,7 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->first_name }} <span class="caret"></span>
+                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -97,6 +97,9 @@
                 @endforeach
             @endif
             @yield('cart')
+            @yield('profile')
+            @yield('order_details')
+            @yield('support')
         </main>
     </div>
 </body>

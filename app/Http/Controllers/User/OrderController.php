@@ -55,7 +55,7 @@ class OrderController extends Controller
 //            $order_details = $this->getDetailsForAnOrder($order->id);
 //            $total = 0;
 //            foreach ($order_details as $order_detail){
-//                $total += $order_detail->price;
+//                $total += ($order_detail->price*$order_detail->quantity);
 //            }
 //            echo "Order_Id = ".$order->id." Total = ".$total."<br>";
 //        }
@@ -64,6 +64,7 @@ class OrderController extends Controller
 
     public function getDetailsForAnOrder($orderId){
         try{
+            $order = Order::findOrFail($orderId);
             $userId = Auth::user()->id;
             $order_detail = DB::table('orders')
                 ->join('users','users.id','=','orders.user_id')
@@ -74,15 +75,23 @@ class OrderController extends Controller
                 ->select(
                     'order_details.id','order_details.price',
                     'order_details.quantity','products.name as name',
-                    'products.image', 'products.description',
-                    'measurement_types.name','categories.name'
+                    'products.image as image', 'products.description as description',
+                    'measurement_types.name as measure','categories.name'
                 )
                 ->where([
                     'users.id' => $userId,
                     'orders.id'=>  $orderId
                 ])
                 ->get();
-            return $order_detail;
+            $total = 0;
+            foreach ($order_detail as $od){
+                $total += $od->quantity*$od->price;
+            }
+            return view('profile.orders')->with([
+                'order'=>$order,
+                'order_detail'=>$order_detail,
+                'total'=>$total
+            ]);
         }
         catch (QueryException $e){
             return "Something went wrong";
