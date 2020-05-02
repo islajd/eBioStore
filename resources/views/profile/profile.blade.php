@@ -18,7 +18,7 @@
         </ul>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane active in" id="profileDetails" role="tabpanel" aria-labelledby="home-tab">
-                <form id="tab" method="POST" action="  changeDetails">
+                <form id="tab" method="POST" action="user/edit">
                     {{ csrf_field() }}
                     <br>
                     <label>First Name</label>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="tab-pane fade" id="password">
-                <form id="tab2" action="changePassword" method="POST">
+                <form id="tab2" action="user/changePassword" method="POST">
                     {{ csrf_field() }}
                     <br>
                     <label>Old Password</label>
@@ -79,7 +79,7 @@
                             <td>{{$order->address}}</td>
                             <td>{{$order->status}}</td>
                             <td>
-                                <a href="/getDetailsForMyOrder/{{ $order->id }}" class="btn btn-primary">Details</a>
+                                <a href="/myOrder/{{ $order->id }}/details" class="btn btn-primary">Details</a>
                             </td>
                         </tr>
                     @endforeach

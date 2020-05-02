@@ -24,14 +24,13 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Phone Number</th>
-                            <th>Role</th>
-                            <th>EDIT</th>
-                            <th>DELETE</th>
+                            <th style="text-align: center">First Name</th>
+                            <th style="text-align: center">Last Name</th>
+                            <th style="text-align: center">Email</th>
+                            <th style="text-align: center">Address</th>
+                            <th style="text-align: center">Phone Number</th>
+                            <th style="text-align: center">Role</th>
+                            <th style="text-align: center">DELETE</th>
                             </thead>
                             <tbody>
                             @foreach($users as $user)
@@ -41,12 +40,24 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->address }}</td>
                                 <td>{{ $user->phone_number }}</td>
-                                <td>{{ $user->role_name }}</td>
-                                <td>
-                                    <a href="/user-edit/{{ $user->user_id }}" class="btn btn-success">EDIT</a>
+                                <td style="width: 250px">
+                                    <form action="/user/{{ $user->user_id }}/changeRole" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PUT') }}
+                                        <select name="role" class="form-control" style="display: inline;width: 100px">
+                                            @foreach($roles as $role)
+                                                @if($role->id == $user->role_id)
+                                                    <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
+                                                @else
+                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-info" style="display: inline">Change</button>
+                                    </form>
                                 </td>
                                 <td>
-                                    <form action="/user-delete/{{ $user->user_id }}" method="POST">
+                                    <form action="/user/{{ $user->user_id }}/delete" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type="submit" class="btn btn-danger">DELETE</button>

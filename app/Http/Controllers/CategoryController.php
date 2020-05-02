@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -11,12 +11,19 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    public function index(){
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Operations
+    |--------------------------------------------------------------------------
+    */
+
+
+    public function getCategories(){
         $categories = Category::all();
         return view('admin.categories.categories')->with('categories',$categories);
     }
 
-    public function store(Request $request){
+    public function saveCategory(Request $request){
         if(!$request->has('name')){
             return redirect('categories')->with('error','Something went Wrong');
         }
@@ -26,7 +33,7 @@ class CategoryController extends Controller
         return redirect('categories')->with('status','Category Added');
     }
 
-    public function delete(Request $request,$id){
+    public function deleteCategory(Request $request,$id){
         try{
             $category = Category::find($id);
             $category->delete();

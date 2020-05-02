@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Operations
+    |--------------------------------------------------------------------------
+    */
 
     public function addToCart(Request $request,$productId,$amount){
         try{
@@ -63,13 +69,13 @@ class CartController extends Controller
     public function emptyCart(){
         $userId = Auth::user()->id;
         $cart = Cart::where('user_id',$userId)->delete();
-        return redirect('getProductsAtCart')->with('status','Cart is Empty');
+        return redirect('cart')->with('status','Cart is Empty');
     }
 
     public function deleteProductAtCart($productId){
         $userId = Auth::user()->id;
         $cart = Cart::where(['user_id'=>$userId,'product_id'=>$productId])->delete();
-        return redirect('getProductsAtCart');
+        return redirect('cart');
     }
 
     public function changeAmount($productId,Request $request){
@@ -84,7 +90,7 @@ class CartController extends Controller
                 return redirect('getProductsAtCart')->with('status','Value Error');
             }
             $cart = Cart::where(['user_id'=>$userId,'product_id'=>$productId])->update(['amount'=>$newAmount]);
-            return redirect('getProductsAtCart');
+            return redirect('cart');
         }
         catch (ModelNotFoundException $e){
             return redirect('getProductsAtCart')->with('status','Product Not Found');
@@ -111,7 +117,7 @@ class CartController extends Controller
     public function createOrder(Request $request){
         $carts = $this->getCart();
         if(count($carts)==0){
-            return redirect('getProductsAtCart')->with('status','Cart Empty');
+            return redirect('cart')->with('status','Cart Empty');
         }
         else{
             try{
@@ -123,7 +129,7 @@ class CartController extends Controller
                 }
             }
             catch (ModelNotFoundException $e){
-                return redirect('getProductsAtCart')->with('status','Order Not Completed');
+                return redirect('cart')->with('status','Order Not Completed');
             }
 
             $userId = Auth::user()->id;
@@ -147,7 +153,7 @@ class CartController extends Controller
                 $product->update();
             }
             $this->emptyCart();
-            return redirect('getProfile')->with('status','Order Completed');
+            return redirect('profile')->with('status','Order Completed');
         }
     }
 

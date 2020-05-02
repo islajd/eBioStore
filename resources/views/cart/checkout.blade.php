@@ -6,7 +6,7 @@
             Checkout
         </div>
         <div class="card-body">
-            <form id="contact-form" method="post" action="createOrderByCart">
+            <form id="contact-form" method="post" action="order/create">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-md-12">

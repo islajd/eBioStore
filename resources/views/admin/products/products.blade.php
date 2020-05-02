@@ -14,7 +14,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="/save-product" enctype="multipart/form-data">
+                <form method="POST" action="/product/save" enctype="multipart/form-data">
                 <div class="modal-body">
 
                         {{ csrf_field() }}
@@ -109,10 +109,10 @@
                                     <td>{{ $product->date }}</td>
                                     <td>{{ $product->category_name }}</td>
                                     <td>
-                                        <a href="/product-edit/{{ $product->product_id }}" class="btn btn-success">EDIT</a>
+                                        <a href="/product/{{ $product->product_id }}/edit" class="btn btn-success">EDIT</a>
                                     </td>
                                     <td>
-                                        <form action="/product-delete/{{ $product->product_id }}" method="POST">
+                                        <form action="/product/{{ $product->product_id }}/delete" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" class="btn btn-danger">DELETE</button>

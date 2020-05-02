@@ -11,7 +11,7 @@
             @endif
         </div>
         <div class="card-body">
-            <form id="contact-form" method="post" action="sendSupportRequest">
+            <form id="contact-form" method="post" action="support/sendRequest">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-md-6">

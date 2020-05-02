@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\MeasurementType;
@@ -14,7 +14,33 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index(){
+    /*
+    |--------------------------------------------------------------------------
+    | Guest Operations
+    |--------------------------------------------------------------------------
+    */
+
+    public function getProductsByCategory($id){
+        $products = DB::table('products')
+            ->join('categories','products.category_id','=','categories.id')
+            ->join('measurement_types','products.measurement_id','=','measurement_types.id')
+            ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
+                'products.description as description','products.stock as stock','products.created_at as date',
+                'products.measurement_id as measurement_id','measurement_types.name as measurement_name',
+                'products.category_id as category_id','categories.name as category_name')
+            ->where('category_id',$id)
+            ->get();
+        return $products;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Operations
+    |--------------------------------------------------------------------------
+    */
+
+    public function getProducts(){
         $products = DB::table('products')
             ->join('categories','products.category_id','=','categories.id')
             ->join('measurement_types','products.measurement_id','=','measurement_types.id')
@@ -32,7 +58,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function saveProduct(Request $request){
         if(!$request->has(['name','price','stock','category','measurement_type'])){
             return redirect('products')->with('error','Something went wrong');
         }
@@ -56,7 +82,7 @@ class ProductController extends Controller
     }
 
 
-    public function edit($id){
+    public function editProduct($id){
         try{
             $product = Product::findOrFail($id);
             $categories = Category::all();
@@ -72,7 +98,7 @@ class ProductController extends Controller
         }
     }
 
-    public function update(Request $request,$id){
+    public function updateProduct(Request $request,$id){
         if(!$request->has(['name','price','stock','category','measurement_type'])){
             return redirect('products')->with('error','Something went wrong');
         }
@@ -101,11 +127,11 @@ class ProductController extends Controller
         }
 
         catch (QueryException $e){
-            return redirect('/products')->with('error','Field cannot be null');
+            return redirect('products')->with('error','Field cannot be null');
         }
     }
 
-    public function delete($id){
+    public function deleteProduct($id){
         try{
             $product = Product::findOrFail($id);
             $productImage = $product->image; // because if product delete we need to save image path to delete
@@ -119,19 +145,6 @@ class ProductController extends Controller
         catch (QueryException $e){
             return redirect('products')->with('error','Cannot Delete. Many Orders Has This Product');
         }
-    }
-
-    public function getProductsByCategory($id){
-        $products = DB::table('products')
-            ->join('categories','products.category_id','=','categories.id')
-            ->join('measurement_types','products.measurement_id','=','measurement_types.id')
-            ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
-                'products.description as description','products.stock as stock','products.created_at as date',
-                'products.measurement_id as measurement_id','measurement_types.name as measurement_name',
-                'products.category_id as category_id','categories.name as category_name')
-            ->where('category_id',$id)
-            ->get();
-        return $products;
     }
 
 }

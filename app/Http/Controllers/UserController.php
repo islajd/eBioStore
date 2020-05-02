@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\User;
@@ -12,22 +12,26 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
 use DB;
 
-
-
 class UserController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | User Operations
+    |--------------------------------------------------------------------------
+    */
+
     public function getProfile(){
         try{
             $userId = Auth::user()->id;
             $user = User::findOrFail($userId);
-            $orders = app(\App\Http\Controllers\User\OrderController::class)->getOrders();
+            $orders = app(\App\Http\Controllers\OrderController::class)->getUserOrders();
             return view('profile.profile')->with([
                 'user'=>$user,
                 'orders'=> $orders
             ]);
         }
         catch (ModelNotFoundException $e){
-            return 'User not found';
+            return redirect('/')->with('status','User Not Found');
         }
     }
 
@@ -44,13 +48,13 @@ class UserController extends Controller
             $user->phone_number = $request->input('phone_number');
             $user->address = $request->input('address');
             $user->update();
-            return redirect('getProfile')->with('status','Updated');
+            return redirect('profile')->with('status','Updated');
         }
         catch (ModelNotFoundException $e){
-            return 'User not found';
+            return redirect('profile')->with('status','User not found');
         }
         catch (QueryException $e){
-            return 'Fields cannot be null';
+            return redirect('profile')->with('status','Fields cannot be null');
         }
     }
 
@@ -65,78 +69,62 @@ class UserController extends Controller
             $new_password = $request->input('new_password');
             $confirm_password = $request->input('confirm_password');
             if($old_password==null || $new_password==null || $confirm_password==null){
-                return redirect('getProfile')->with('error','Please Complete Fields');
+                return redirect('profile')->with('error','Please Complete Fields');
             }
             if($new_password != $confirm_password){
-                return redirect('getProfile')->with('status','Password Not Match');
+                return redirect('profile')->with('status','Password Not Match');
             }
             if(Hash::check($old_password,$user->password)){
                 $user->password = Hash::make($new_password);
                 $user->update();
-                return redirect('getProfile')->with('status','Password Changed');
+                return redirect('profile')->with('status','Password Changed');
             }
             else{
-                return redirect('getProfile')->with('error','Old Password Incorrect');
+                return redirect('profile')->with('error','Old Password Incorrect');
             }
         }
         catch (ModelNotFoundException $e){
-            return redirect('getProfile')->with('error','User Not Found');
+            return redirect('profile')->with('error','User Not Found');
         }
         catch (QueryException $e){
-            return redirect('getProfile')->with('error','Fields Cannot Be Null');
+            return redirect('profile')->with('error','Fields Cannot Be Null');
         }
     }
 
-    //==================================
-    //Admin operations
-    //==================================
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Operations
+    |--------------------------------------------------------------------------
+    */
 
-    public function getRegisteredUsers(){
+    public function getUsers(){
         $users = DB::table('users')
             ->join('roles','users.role_id','=','roles.id')
             ->select('users.id as user_id','users.email as email','users.first_name as first_name',
                 'users.last_name as last_name','users.phone_number as phone_number','users.address as address',
                 'roles.id as role_id','roles.name as role_name')
             ->get();
-        $roles = Role::all();
-        return view('admin.users.registeredUsers')->with([
+        return view('admin.users.users')->with([
             'users' => $users,
-            'roles' => $roles,
+            'roles' => Role::all()
         ]);
     }
 
-    public function editUser(Request $request,$id){
-        try{
-            $user = User::findOrFail($id);
-            $roles = Role::all();
-            return view('admin.users.editUser')->with([
-                'user' => $user,
-                'roles' => $roles,
-            ]);
-        }
-        catch (ModelNotFoundException $e){
-            return redirect('registeredUsers')->with('error','User not found');
-        }
-    }
-
-    public function updateUser(Request $request,$id){
-        if(!$request->has(['first_name','last_name','role','email'])){
-            return redirect('registeredUsers')->with('error','Something went wrong');
+    public function changeRole(Request $request,$id){
+        if(!$request->has('role')){
+            return redirect('users')->with('error','Something went wrong');
         }
         try{
             $user = User::findOrFail($id);
-            $user->first_name = $request->input('first_name');
-            $user->last_name = $request->input('last_name');
-            $user->email = $request->input('email');
             $user->role_id = $request->input('role');
             $user->update();
-            return redirect('/registeredUsers')->with('status','User updated');
+            return redirect('users')->with('status','User updated');
         }
         catch(ModelNotFoundException $e){
-            return redirect('/registeredUsers')->with('error','User Not Found');
+            return redirect('users')->with('error','User Not Found');
         }
         catch (QueryException $e){
-            return redirect('/registeredUsers')->with('error','Field cannot be null');
+            return redirect('users')->with('error','Field cannot be null');
         }
     }
 
@@ -144,13 +132,13 @@ class UserController extends Controller
         try{
             $user = User::findOrFail($id);
             $user->delete();
-            return redirect('/registeredUsers')->with('status','User deleted');
+            return redirect('users')->with('status','User deleted');
         }
         catch (ModelNotFoundException $e){
-            return redirect('/registeredUsers')->with('error','User Not Found');
+            return redirect('users')->with('error','User Not Found');
         }
         catch (QueryException $e){
-            return redirect('/registeredUsers')->with('error','Cannot Delete. This User has many order');
+            return redirect('users')->with('error','Cannot Delete. This User has many order');
         }
     }
 

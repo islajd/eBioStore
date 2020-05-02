@@ -25,7 +25,7 @@
             <td>{{$product->name}}</td>
             <td> <input type="number"  id="price" value="{{$product->price}}" hidden> {{$product->price}} LEK</td>
             <td>
-                <form method="POST" action="changeAmount/{{$product->product_id}}">
+                <form method="POST" action="cart/{{$product->product_id}}/changeAmount">
                     {{ csrf_field() }}
                     <input type="number" value="{{$product->quantity}}" name="amount">
                     <button type="submit" class="btn btn-primary">Change</button>
@@ -33,7 +33,7 @@
             </td>
             <td id="total">{{$product->price * $product->quantity}}</td>
             <td>
-                <form action="deleteProductAtCart/{{ $product->product_id }}" method="POST">
+                <form action="cart/delete/{{ $product->product_id }}/product" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                     <button type="submit" class="btn btn-danger">DELETE</button>
@@ -59,7 +59,7 @@
                         </form>
                     </div>
                     <div class="col-md-8">
-                        <form method="POST" action="/emptyCart">
+                        <form method="POST" action="cart/empty">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger">Empty Cart</button>
                         </form>

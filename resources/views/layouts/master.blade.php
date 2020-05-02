@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Files -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/css/now-ui-dashboard.css?v=1.5.0')}}" rel="stylesheet" />
 
 </head>
 
@@ -30,21 +30,15 @@
         </div>
         <div class="sidebar-wrapper" id="sidebar-wrapper">
             <ul class="nav">
-                <li class=" {{ 'dashboard' == request()->path() ? 'active': '' }} ">
-                    <a href="dashboard">
-                        <i class="now-ui-icons design_app"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li class=" {{ 'registeredUsers' == request()->path() ? 'active': '' }} ">
-                    <a href="/registeredUsers">
+                <li class=" {{ 'users' == request()->path() ? 'active': '' }} ">
+                    <a href="/users">
                         <i class="now-ui-icons users_single-02"></i>
                         <p>Users</p>
                     </a>
                 </li>
                 <li class=" {{ 'products' == request()->path() ? 'active': '' }} ">
                     <a href="/products">
-                        <i class="now-ui-icons design_bullet-list-67"></i>
+                        <i class="now-ui-icons design_app"></i>
                         <p>Products</p>
                     </a>
                 </li>
@@ -54,8 +48,8 @@
                         <p>Categories</p>
                     </a>
                 </li>
-                <li class=" {{ 'getOrders' == request()->path() ? 'active': '' }} ">
-                    <a href="/getOrders">
+                <li class=" {{ 'orders' == request()->path() ? 'active': '' }} ">
+                    <a href="/orders">
                         <i class="now-ui-icons design_bullet-list-67"></i>
                         <p>Orders</p>
                     </a>
@@ -118,10 +112,10 @@
 </div>
 
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.min.js"></script>
-<script src="../assets/js/core/popper.min.js"></script>
-<script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<script src="{{asset('assets/js/core/jquery.min.js')}}"></script>
+<script src="{{asset('assets/js/core/popper.min.js')}}"></script>
+<script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
 @yield('scripts')
 
 </body>

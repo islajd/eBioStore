@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Guest;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Mail;
 
 class SupportController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Guest Operations
+    |--------------------------------------------------------------------------
+    */
+
     public function sendRequest(Request $request){
         Mail::send('support.contact_email',
             array(

@@ -31,7 +31,7 @@ class LoginController extends Controller
 
     protected function redirectTo(){
         if(Auth::user()->role_id == 2){
-            return 'dashboard';
+            return 'products';
         }
         else{
             return 'home';
