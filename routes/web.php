@@ -29,10 +29,10 @@ Route::group(['middleware' => ['auth','admin']],function(){
         return view('admin.dashboard');
     });
 
-    Route::get('/registeredUsers','Admin\UserController@getRegisteredUsers');
-    Route::get('/user-edit/{id}','Admin\UserController@editUser');
-    Route::put('/user-update/{id}','Admin\UserController@updateUser');
-    Route::delete('/user-delete/{id}','Admin\UserController@deleteUser');
+    Route::get('/registeredUsers','User\UserController@getRegisteredUsers');
+    Route::get('/user-edit/{id}','User\UserController@editUser');
+    Route::put('/user-update/{id}','User\UserController@updateUser');
+    Route::delete('/user-delete/{id}','User\UserController@deleteUser');
 
     Route::get('/products','Admin\ProductController@index');
     Route::post('/save-product','Admin\ProductController@store');
@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth']],function(){
 
 
     // They Are Used For User Profile To Show User Profile,To Change Details and To Change Password
-    Route::get('/getProfile','User\UserController@getProfile');
+    Route::get('/getProfile','User\UserController@getProfile')->name('profile');
     Route::post('/changeDetails','User\UserController@changeDetails');
     Route::post('/changePassword','User\UserController@changePassword');
 });

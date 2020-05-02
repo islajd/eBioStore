@@ -56,9 +56,6 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="getProfile">Profile</a>
-                            </li>
-                            <li class="nav-item dropdown">
                                 <a class="nav-link" href="getProductsAtCart">Cart</a>
                             </li>
                             <li class="nav-item dropdown">
@@ -67,12 +64,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        {{ __('Profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -90,12 +89,7 @@
             </div>
         @endguest
         <main class="py-4">
-            @yield('content')
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    <div>{{$error}}</div>
-                @endforeach
-            @endif
+{{--            @yield('content')--}}
             @yield('cart')
             @yield('profile')
             @yield('order_details')
