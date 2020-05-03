@@ -18,13 +18,24 @@
                 </div>
             @endif
             <div class="row pt-4">
-                <ul>
                     @foreach($products as $product)
-                        <li class="card p-4">
-                            <a href="/product/{{$product->product_id}}" class="pl-1">{{$product->name}}</a>
-                        </li>
+                        <div class="card m-4" style="width: 20%;">
+                            <img src="{{asset('storage')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="row">
+{{--                                    $product->product_id--}}
+                                    <a href="{{public_path('app/public/product_images/5domate.jpeg')}}" class="anchorjs-link"><h5 class="card-title">{{$product->name}}</h5></a>
+                                </div>
+                                <div class="row justify-content-between">
+                                    <b>{{$product->price}} ALL</b>
+                                    <i>294 Sold</i>
+                                </div>
+                                <div class="row">
+                                    <a href="/category/{{$product->category_id}}"> <i class="fa fa-angle-right" style="font-size: 15px;"></i> {{$product->category_name}}</a>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
-                </ul>
             </div>
         </div>
     </div>
