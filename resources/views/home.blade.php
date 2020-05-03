@@ -20,7 +20,7 @@
             <div class="row pt-4">
                     @foreach($products as $product)
                         <div class="card m-4" style="width: 20%;">
-                            <img src="{{ asset('/storage/product_images/'.$product->image) }}" class="card-img-top" alt="...">
+                            <img src="{{ asset('/storage/product_images/'.$product->image) }}" class="card-img-top" alt="..." width="100" height="150">
                             <div class="card-body">
                                 <div class="row">
                                     <a href="/product/{{$product->product_id}}" class="anchorjs-link"><h5 class="card-title">{{$product->name}}</h5></a>
