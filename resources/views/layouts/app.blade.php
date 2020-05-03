@@ -94,6 +94,7 @@
         @yield('order_details')
         @yield('support')
         @yield('checkout')
+        @yield('content')  {{-- For Auth Routes --}}
     </div>
 </body>
 </html>
