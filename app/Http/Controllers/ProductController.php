@@ -21,11 +21,19 @@ class ProductController extends Controller
     */
 
     public function getProduct($id){
-        $categories = Category::all();
-        $measurement_types = MeasurementType::all();
+        $product = DB::table('products')
+            ->join('categories','products.category_id','=','categories.id')
+            ->join('measurement_types','products.measurement_id','=','measurement_types.id')
+            ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
+                'products.description as description','products.stock as stock','products.created_at as date',
+                'products.measurement_id as measurement_id','measurement_types.name as measurement_name',
+                'products.category_id as category_id','categories.name as category_name')
+            ->where('products.id',$id)
+            ->first();
+
         return view('product.productDetails')->with([
-            'categories'=>$categories,
-            'measurement_types'=>$measurement_types
+            'product'=>$product,
+            'categories'=>Category::all()
         ]);
     }
 
