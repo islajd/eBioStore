@@ -2,24 +2,7 @@
 
 @section('home')
     <div class="row">
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-header">
-                    <i class="fa fa-list"></i>
-                    <span>Categories</span>
-                </div>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        @foreach($categories as $category)
-                            <li class="list-group-item pl-0">
-                                <i class="fa fa-angle-right" style="font-size: 15px;"></i>
-                                <a href="/category/{{$category->id}}" class="pl-1">{{$category->name}}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        </div>
+        @include('home.categories')
         <div class="col-md-10">
             @if ($products->count() == 0)
                 <div class="row pt-4 justify-content-center">
@@ -37,8 +20,8 @@
             <div class="row pt-4">
                 <ul>
                     @foreach($products as $product)
-                        <li>
-                            {{$product->product_id}}
+                        <li class="card p-4">
+                            <a href="/product/{{$product->product_id}}" class="pl-1">{{$product->name}}</a>
                         </li>
                     @endforeach
                 </ul>

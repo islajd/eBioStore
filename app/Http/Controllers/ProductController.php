@@ -20,6 +20,15 @@ class ProductController extends Controller
     |--------------------------------------------------------------------------
     */
 
+    public function getProduct($id){
+        $categories = Category::all();
+        $measurement_types = MeasurementType::all();
+        return view('product.productDetails')->with([
+            'categories'=>$categories,
+            'measurement_types'=>$measurement_types
+        ]);
+    }
+
     public function getProductsByCategory($id){
         $products = DB::table('products')
             ->join('categories','products.category_id','=','categories.id')
@@ -32,13 +41,6 @@ class ProductController extends Controller
             ->get();
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
-//        if(count($products)==0){
-//            return view('home')->with([
-//                'products'=>$products,
-//                'categories'=>$categories,
-//                'measurement_types'=>$measurement_types
-//            ])->with('error','');
-//        }
         return view('home')->with([
             'products'=>$products,
             'categories'=>$categories,

@@ -40,23 +40,23 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{route("Home")}}">Home</a>
+                            <a class="nav-link" href="{{route("Home")}}"><i class="fa fa-home"></i> Home </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{route("Support")}}">Support</a>
+                            <a class="nav-link" href="{{route("Support")}}"><i class="fa fa-support"></i> Support</a>
                         </li>
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="modal" data-target="#modalLoginForm">{{ __('Login') }}</a>
+                                <a class="nav-link" style="color: green" data-toggle="modal" data-target="#modalLoginForm">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="modal" data-target="#modalRegisterForm">{{ __('Register') }}</a>
+                                    <a class="nav-link" style="color: green" data-toggle="modal" data-target="#modalRegisterForm">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="cart">Cart</a>
+                                <a class="nav-link" href="cart"><i class="fa fa-shopping-cart"></i> Cart</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -65,12 +65,12 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('profile') }}">
-                                        {{ __('Profile') }}
+                                        <i class="fa fa-user-circle"></i> {{ __('Profile') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <i class="fa fa-sign-out"></i> {{ __('Logout') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -88,6 +88,7 @@
         @endguest
 {{--            {{$errors}}--}}
         @yield('home')
+        @yield('product')
         @yield('cart')
         @yield('profile')
         @yield('order_details')

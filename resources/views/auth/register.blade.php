@@ -1,7 +1,9 @@
 <div class="row justify-content-center modal fade" id="modalRegisterForm" role="dialog">
     <div class="col-md-4 modal-dialog" role="document">
         <div class="card modal-content">
-            <div class="modal-header">{{ __('Register') }}</div>
+            <div class="modal-header">
+                <span style="color: green"> {{ __('Register') }}</span>
+            </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
