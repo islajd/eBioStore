@@ -21,23 +21,28 @@ class CartController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function addToCart(Request $request,$productId,$amount){
+    public function addToCart(Request $request,$productId){
         try{
             $product = Product::findOrFail($productId);
+            $userId = Auth::user()->id;
+            $amount = $request->input('quantity');
+
+            if( Cart::where('user_id',$userId)->where('product_id',$productId)->first() ){
+                return back()->with('error','This Product Is At Cart');
+            }
             if($product->stock < $amount && $amount>0){
-                return 'You cannot buy more than stock';
+                return back()->with('error','Invalid Value');
             }
             $cart = new Cart();
-            $cart->user_id = Auth::user()->id;
+            $cart->user_id = $userId;
             $cart->product_id = $productId;
-            // Amount should get by an input form
-//        $cart->amount = $request->input('amount');
+            $cart->amount = $amount;
             $cart->amount = $amount;
             $cart->save();
-            return $cart;
+            return back()->with('status','Success');
         }
         catch (ModelNotFoundException $e){
-            return 'Product Not Found';
+            return back()->with('error','Product Not Found');
         }
 
     }

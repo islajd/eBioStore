@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth','admin']],function(){
 
 Route::group(['middleware' => ['auth']],function(){
     // Cart Routes
-    Route::get('/cart','CartController@getProductsAtCart'); // Get Cart Page
+    Route::get('/cart','CartController@getProductsAtCart')->name('Cart'); // Get Cart Page
     Route::post('/cart/empty','CartController@emptyCart');
     Route::delete('/cart/delete/{productId}/product','CartController@deleteProductAtCart');
     Route::post('/cart/{productId}/changeAmount','CartController@changeAmount');
@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('/order/create','CartController@createOrder'); // Should Be After Checkout Page
 
     // Should Be in Single Product Page To Add a Product To Cart
-    Route::get('/cart/addToCart/{productId}/{amount}','CartController@addToCart');
+    Route::post('/cart/addToCart/{productId}','CartController@addToCart');
 
     // Get Orders Details For An Order
     Route::get('/myOrder/{orderId}/details','OrderController@getDetailsForAnUserOrder');
