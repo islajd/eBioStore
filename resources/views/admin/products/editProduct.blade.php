@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> Edit Product </h4>
-                    <form method="POST" action="{{ url('product-update/'.$product->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('product/'.$product->id.'/update') }}" enctype="multipart/form-data">
                         <div class="modal-body">
 
                             {{ csrf_field() }}
@@ -58,7 +58,9 @@
                                        name="image" aria-describedby="inputGroupFileAddon01">
                                 <label class="custom-file-label" for="inputGroupFile01">Image</label>
                             </div>
-                            <img src="storage/app/public/product_images/{{ $product->image }}" width="100" height="100">
+                            <div>
+                                <img src="{{ asset('/storage/product_images/'.$product->image) }}" width="200" height="200">
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <a href=" {{ url('products') }}" class="btn btn-secondary">Back</a>
