@@ -34,7 +34,7 @@ class LoginController extends Controller
             return 'products';
         }
         else{
-            return 'home';
+            return "home";
         }
     }
     /**

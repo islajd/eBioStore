@@ -18,7 +18,7 @@ Route::get('/category/{id}', 'ProductController@getProductsByCategory');
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ProductController@listProducts');
 
 Route::group(['middleware' => ['auth','admin']],function(){
     Route::get('/users','UserController@getUsers');
