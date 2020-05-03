@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'ProductController@listProducts');
+Route::get('/', 'ProductController@listProducts')->name("Home");
+Route::get('/category/{id}', 'ProductController@getProductsByCategory');
 
 Auth::routes();
 
@@ -60,12 +61,12 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('/user/changePassword','UserController@changePassword');
 });
 
-Route::get('/products/{id}/category', 'ProductController@getProductsByCategory');
+
 
 
 // Support Mail Services
 Route::get('/support',function (){
     return view('support.support');
-});
+})->name("Support");
 
 Route::post('/support/sendRequest','SupportController@sendRequest');

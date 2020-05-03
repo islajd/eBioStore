@@ -30,7 +30,20 @@ class ProductController extends Controller
                 'products.category_id as category_id','categories.name as category_name')
             ->where('category_id',$id)
             ->get();
-        return $products;
+        $categories = Category::all();
+        $measurement_types = MeasurementType::all();
+//        if(count($products)==0){
+//            return view('home')->with([
+//                'products'=>$products,
+//                'categories'=>$categories,
+//                'measurement_types'=>$measurement_types
+//            ])->with('error','');
+//        }
+        return view('home')->with([
+            'products'=>$products,
+            'categories'=>$categories,
+            'measurement_types'=>$measurement_types
+        ]);
     }
 
     public function listProducts(){
@@ -44,6 +57,13 @@ class ProductController extends Controller
             ->get();
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
+        if(count($products)==0){
+            return view('home')->with([
+                'products'=>$products,
+                'categories'=>$categories,
+                'measurement_types'=>$measurement_types
+            ])->with('error','Didn\'t found any product, visit back latter.');
+        }
         return view('home')->with([
             'products'=>$products,
             'categories'=>$categories,
