@@ -6,7 +6,7 @@
             <div class="container" style="margin-top: 10px;">
                 <div class="row">
                     <div class="col-md-5 border-right">
-                        <img class="d-block w-100" src="images1.jpg" alt="Product">
+                        <img class="d-block w-100" src="{{ asset('/storage/product_images/'.$product->image) }}" alt="Product">
                     </div>
                     <div class="col-md-7 p-5">
                         <form action="/cart/addToCart/{{$product->product_id}}" method="POST">
