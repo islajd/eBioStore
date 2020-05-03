@@ -1,4 +1,4 @@
-<div class="row justify-content-center modal fade" id="modalRegisterForm" tabindex="-1" role="dialog">
+<div class="row justify-content-center modal fade" id="modalRegisterForm" role="dialog">
     <div class="col-md-4 modal-dialog" role="document">
         <div class="card modal-content">
             <div class="modal-header">{{ __('Register') }}</div>

@@ -83,13 +83,14 @@
             </div>
         </nav>
         @guest
-            <div class="container">
-                @extends('auth.register')
-                @extends('auth.login')
-            </div>
+            <div id="auth">
+                @include('auth.login')
+                @include('auth.register')
+             </div>
         @endguest
         <main class="py-4">
-{{--            @yield('content')--}}
+            {{$errors}}
+            @yield('products')
             @yield('cart')
             @yield('profile')
             @yield('order_details')

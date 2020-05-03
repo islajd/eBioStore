@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('products')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,7 +14,13 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <ul>
+                        @foreach($products as $product)
+                            <li>
+                                {{$product->product_id}}
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
