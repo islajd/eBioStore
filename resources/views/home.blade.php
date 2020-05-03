@@ -23,8 +23,7 @@
                             <img src="{{asset('storage')}}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <div class="row">
-{{--                                    $product->product_id--}}
-                                    <a href="{{public_path('app/public/product_images/5domate.jpeg')}}" class="anchorjs-link"><h5 class="card-title">{{$product->name}}</h5></a>
+                                    <a href="/product/{{$product->product_id}}" class="anchorjs-link"><h5 class="card-title">{{$product->name}}</h5></a>
                                 </div>
                                 <div class="row justify-content-between">
                                     <b>{{$product->price}} ALL</b>
