@@ -24,9 +24,9 @@ class SupportController extends Controller
                 'msg' => $request->input('message'),
             ), function($message) use ($request)
             {
-                $message->from('regi.muci@fshnstudent.info');
+                $message->from('ebiostoresupp@gmail.com');
                 $message->subject('e-Bio Store Support');
-                $message->to('regi.muci@fshnstudent.info');
+                $message->to('ebiostoresupp@gmail.com');
             });
 
         return back()->with('status', 'Thank you for contact us!');
