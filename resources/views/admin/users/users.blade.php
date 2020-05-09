@@ -22,7 +22,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="stripe" id="myTable">
                             <thead class=" text-primary">
                             <th style="text-align: center">First Name</th>
                             <th style="text-align: center">Last Name</th>
@@ -40,11 +40,11 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->address }}</td>
                                 <td>{{ $user->phone_number }}</td>
-                                <td style="width: 250px">
+                                <td style="width: 250px;">
                                     <form action="/user/{{ $user->user_id }}/changeRole" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
-                                        <select name="role" class="form-control" style="display: inline;width: 100px">
+                                        <select name="role" class="form-control" style="display: inline;width: 80px">
                                             @foreach($roles as $role)
                                                 @if($role->id == $user->role_id)
                                                     <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
@@ -75,5 +75,9 @@
 @endsection
 
 @section('scripts')
-
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
 @endsection

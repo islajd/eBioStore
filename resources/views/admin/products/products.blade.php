@@ -86,7 +86,7 @@
                 </style>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="stripe" id="myTable">
                             <thead class=" text-primary">
                             <th class="w-10">Name</th>
                             <th class="w-10">Price</th>
@@ -130,5 +130,10 @@
 @endsection
 
 @section('scripts')
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
 
 @endsection

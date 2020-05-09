@@ -15,6 +15,10 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/now-ui-dashboard.css?v=1.5.0')}}" rel="stylesheet" />
 
+{{--    <link rel="stylesheet" href="{{ asset('assets/css/dataTables.min.css') }}">--}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+
 </head>
 
 <body class="">
@@ -116,6 +120,7 @@
 <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
+<script src="{{asset('assets/js/dataTables.min.js') }}"></script>
 @yield('scripts')
 
 </body>
