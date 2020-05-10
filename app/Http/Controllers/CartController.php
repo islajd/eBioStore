@@ -89,16 +89,16 @@ class CartController extends Controller
             $product = Product::findOrFail($productId);
             $newAmount = $request->input('amount');
             if($product->stock < $newAmount && $newAmount>0 ){
-                return redirect('getProductsAtCart')->with('status','You cannot buy more than stock');
+                return redirect('cart')->with('status','You cannot buy more than stock');
             }
             if($newAmount<=0 ){
-                return redirect('getProductsAtCart')->with('status','Value Error');
+                return redirect('cart')->with('status','Value Error');
             }
             $cart = Cart::where(['user_id'=>$userId,'product_id'=>$productId])->update(['amount'=>$newAmount]);
             return redirect('cart');
         }
         catch (ModelNotFoundException $e){
-            return redirect('getProductsAtCart')->with('status','Product Not Found');
+            return redirect('cart')->with('status','Product Not Found');
         }
     }
 
@@ -129,7 +129,7 @@ class CartController extends Controller
                 foreach ($carts as $cart) {
                     $product = Product::findOrFail($cart->product_id);
                     if ($cart->amount > $product->stock || $cart->amount == 0) {
-                        return redirect('getProductsAtCart')->with('status','Order Not Completed');
+                        return redirect('cart')->with('status','Order Not Completed');
                     }
                 }
             }
