@@ -60,6 +60,10 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('/profile','UserController@getProfile')->name('profile');
     Route::post('/user/edit','UserController@changeDetails');
     Route::post('/user/changePassword','UserController@changePassword');
+
+    //PayPal Payment
+    Route::post('paypal','PaymentController@payWithPayPal');
+    Route::post('status','PaymentController@getPaymentStatus');
 });
 
 

@@ -6,11 +6,25 @@
             Checkout
         </div>
         <div class="card-body">
-            <form id="contact-form" method="post" action="order/create">
+            <!-- This should be in profile -->
+            @if(session('success'))
+                <div class="alert alert-success">
+                    Success. Payment completed and your order will be ready soon
+                </div>
+            @elseif(session('error'))
+                <div class="alert alert-success">
+                    Something went wrong. Try again or contact our support
+                </div>
+            @endif
+            <!-- End -->
+
+{{--            <form id="contact-form" method="post" action="order/create">--}}
+            <form id="payment-form" method="POST" action="{{ URL::to('paypal') }}">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-md-12">
                         <h1>Total Price: {{$total}}</h1>
+                        <input type="hidden" value="{{$total}}" name="total">
                     </div>
                 </div>
                 <div class="row">
@@ -24,12 +38,11 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="submit" class="btn btn-success btn-send" value="Order Now">
+                        <input type="submit" class="btn btn-success btn-send" value="Pay with PayPal">
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
 
 @endsection
