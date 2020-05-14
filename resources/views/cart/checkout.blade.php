@@ -12,7 +12,7 @@
                     Success. Payment completed and your order will be ready soon
                 </div>
             @elseif(session('error'))
-                <div class="alert alert-success">
+                <div class="alert alert-danger">
                     Something went wrong. Try again or contact our support
                 </div>
             @endif

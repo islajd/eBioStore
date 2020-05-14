@@ -16,6 +16,7 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Exception\PayPalConnectionException;
 use PayPal\Rest\ApiContext;
 use Redirect;
 use Session;
@@ -23,10 +24,13 @@ use URL;
 
 class PaymentController extends Controller
 {
+
+    private $_api_context;
+
     public function __construct(){
         /** PayPal api context **/
 
-        $paypal_conf = \Config::get('paypal');
+        $paypal_conf = config('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential(
                 $paypal_conf['client_id'],
                 $paypal_conf['secret'])
@@ -39,7 +43,7 @@ class PaymentController extends Controller
         $payer->setPaymentMethod('paypal');
 
         $amount = new Amount();
-        $amount->setCurrency('ALL')
+        $amount->setCurrency('USD')
             ->setTotal($request->get('total'));
 
         $transaction = new Transaction();
@@ -59,7 +63,7 @@ class PaymentController extends Controller
             $payment->create($this->_api_context);
         }
         catch (PayPalConnectionException $ex){
-            if(\Config::get('app.debug')){
+            if(config('app.debug')){
                 \Session::put('error','Connection Timeout');
                 return Redirect::to('/');
             }
@@ -76,7 +80,7 @@ class PaymentController extends Controller
             }
         }
 
-        Session::put('paypal_payment_id',$payment->getId());
+        \Session::put('paypal_payment_id',$payment->getId());
 
         if(isset($redirect_url)){
             return Redirect::away($redirect_url);
