@@ -141,7 +141,7 @@ class CartController extends Controller
             $order = new Order();
             $order->user_id = $userId;
             $order->date = now();
-            $order->status = 'NOT SEND';
+            $order->status = 'SEND';
             $order->address = $request->input('address');
             $order->save();
 

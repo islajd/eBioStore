@@ -9,11 +9,11 @@
             <!-- This should be in profile -->
             @if(session('success'))
                 <div class="alert alert-success">
-                    Success. Payment completed and your order will be ready soon
+                    {{session('success')}}
                 </div>
             @elseif(session('error'))
                 <div class="alert alert-danger">
-                    Something went wrong. Try again or contact our support
+                    {{session('error')}}
                 </div>
             @endif
             <!-- End -->

@@ -47,8 +47,8 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('/cart/empty','CartController@emptyCart');
     Route::delete('/cart/delete/{productId}/product','CartController@deleteProductAtCart');
     Route::post('/cart/{productId}/changeAmount','CartController@changeAmount');
-    Route::get('/checkout','CartController@checkout');
-    Route::post('/order/create','CartController@createOrder'); // Should Be After Checkout Page
+    Route::get('/checkout','CartController@checkout')->name('checkout');
+    Route::post('/order/create','CartController@createOrder'); // After PayPal Success
 
     // Should Be in Single Product Page To Add a Product To Cart
     Route::post('/cart/addToCart/{productId}','CartController@addToCart');
@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth']],function(){
 
     //PayPal Payment
     Route::post('paypal','PaymentController@payWithPayPal');
-    Route::post('status','PaymentController@getPaymentStatus');
+    Route::get('status','PaymentController@getPaymentStatus');
 });
 
 
@@ -75,5 +75,3 @@ Route::get('/support',function (){
 })->name("Support");
 
 Route::post('/support/sendRequest','SupportController@sendRequest');
-
-//rollback
