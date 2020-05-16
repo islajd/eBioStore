@@ -106,7 +106,7 @@ class PaymentController extends Controller
         if ($result->getState() == 'approved') {
             $order = new OrderController();
             $order->createOrder();
-            return redirect('profile')->with('status', 'Payment success');
+            return redirect('home')->with('PaymentStatus', 'Payment success');
         }
 
         return redirect('cart')->with('error', 'Payment failed');

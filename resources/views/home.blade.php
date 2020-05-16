@@ -17,6 +17,15 @@
                     </div>
                 </div>
             @endif
+            @if (session('PaymentStatus'))
+                <div class="row pt-4 justify-content-center alert alert-success" role="alert">
+                    {{ session('PaymentStatus') }}
+                </div>
+            @elseif(session('error'))
+                <div class="row pt-4 justify-content-center alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="row pt-4">
                     @foreach($products as $product)
                         <div class="card m-4" style="width: 20%;">
