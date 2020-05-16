@@ -18,30 +18,35 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        a:hover{
+            text-decoration: none;
+        }
+    </style>
 </head>
-<body>
-    <div class="bg-success">
-    <div class="container">
-        <div class="row px-md-0">
-            <div class="col-lg-12 d-block">
-                <div class="row d-flex" style="color: white">
-                    <div class="col-md pr-4 d-flex topper align-items-center">
-                        <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="fa fa-phone"></span></div>
-                        <span class="text">+35569 3435 333</span>
-                    </div>
-                    <div class="col-md pr-4 d-flex topper align-items-center">
-                        <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="fa fa-paper-plane"></span></div>
-                        <span class="text">ebiostoresupp@gmail.com</span>
-                    </div>
-                    <div class="pr-4 d-flex topper align-items-center text-lg-right">
-                        <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+<body style="background-color: white">
+    <div id="app">
+        <div class="bg-success">
+            <div class="container">
+                <div class="row px-md-0">
+                    <div class="col-lg-12 d-block">
+                        <div class="row d-flex" style="color: white">
+                            <div class="col-md pr-4 d-flex topper align-items-center">
+                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="fa fa-phone"></span></div>
+                                <span class="text">+35569 3435 333</span>
+                            </div>
+                            <div class="col-md pr-4 d-flex topper align-items-center">
+                                <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="fa fa-paper-plane"></span></div>
+                                <span class="text">ebiostoresupp@gmail.com</span>
+                            </div>
+                            <div class="pr-4 d-flex topper align-items-center text-lg-right">
+                                <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-    <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{route("Home")}}">

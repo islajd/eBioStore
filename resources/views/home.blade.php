@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('home')
-    <div class="row">
+    <div class="row mr-auto">
         @include('home.categories')
         <div class="col-md-10">
             @if ($products->count() == 0)
@@ -28,15 +28,15 @@
             @endif
             <div class="row pt-4">
                     @foreach($products as $product)
-                        <div class="card m-4" style="width: 20%;">
+                        <div class="card m-4 bg-transparent " style="width: 20%;">
                             <img src="{{ asset('/storage/product_images/'.$product->image) }}" class="card-img-top" alt="..." width="100" height="150">
-                            <div class="card-body">
+                            <div class="card-body mt-2 mr-2 ml-2">
                                 <div class="row">
                                     <a href="/product/{{$product->product_id}}" class="anchorjs-link"><h5 class="card-title">{{$product->name}}</h5></a>
                                 </div>
-                                <div class="row justify-content-between">
-                                    <b>{{$product->price}} $</b>
-                                    <i>294 Sold</i>
+                                <div class="row justify-content-between" >
+                                    <i>{{$product->sold}} <span>orders</span> </i>
+                                    <b style="color: green">${{$product->price}}</b>
                                 </div>
                                 <div class="row">
                                     <a href="/category/{{$product->category_id}}"> <i class="fa fa-angle-right" style="font-size: 15px;"></i> {{$product->category_name}}</a>
