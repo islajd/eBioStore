@@ -11,6 +11,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -19,6 +20,35 @@ class OrderController extends Controller
     | User Operations
     |--------------------------------------------------------------------------
     */
+
+    public function createOrder(){
+        $c = new CartController();
+        $carts = $c->getCart();
+
+        $userId = Auth::user()->id;
+        $order = new Order();
+        $order->user_id = $userId;
+        $order->date = now();
+        $order->status = 'NOT SEND';
+        $order->address = session('address');
+        $order->save();
+        Session::forget('address');
+
+        foreach ($carts as $cart){
+            $order_detail = new Order_Details();
+            $order_detail->order_id = $order->id;
+            $order_detail->product_id = $cart->product_id;
+            $order_detail->quantity = $cart->amount;
+            $product = Product::where('id',$cart->product_id)->first();
+            $order_detail->price = $product->price;
+            $order_detail->save();
+
+            $product->stock -= $cart->amount;
+            $product->update();
+        }
+        $c->emptyCart();
+
+    }
 
     public function getUserOrders(){
         $userId = Auth::user()->id;
@@ -40,7 +70,7 @@ class OrderController extends Controller
                     'order_details.id','order_details.price',
                     'order_details.quantity','products.name as name',
                     'products.image as image', 'products.description as description',
-                    'measurement_types.name as measure','categories.name'
+                    'measurement_types.name as measure'
                 )
                 ->where([
                     'users.id' => $userId,

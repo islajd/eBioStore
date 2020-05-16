@@ -76,6 +76,7 @@ class PaymentController extends Controller
         }
 
         Session::put('paypal_payment_id',$payment->getId());
+        Session::put('address',$request->input('address'));
 
         if(isset($redirect_url)){
             return Redirect::away($redirect_url);
@@ -103,9 +104,9 @@ class PaymentController extends Controller
         $result = $payment->execute($execution, $this->_api_context);
 
         if ($result->getState() == 'approved') {
-            $cart = new CartController();
-            $cart->createOrder();
-            return redirect('cart')->with('success', 'Payment success');
+            $order = new OrderController();
+            $order->createOrder();
+            return redirect('profile')->with('status', 'Payment success');
         }
 
         return redirect('cart')->with('error', 'Payment failed');

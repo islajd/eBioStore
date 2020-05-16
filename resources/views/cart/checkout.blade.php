@@ -6,7 +6,6 @@
             Checkout
         </div>
         <div class="card-body">
-            <!-- This should be in profile -->
             @if(session('success'))
                 <div class="alert alert-success">
                     {{session('success')}}
@@ -16,14 +15,13 @@
                     {{session('error')}}
                 </div>
             @endif
-            <!-- End -->
 
 {{--            <form id="contact-form" method="post" action="order/create">--}}
             <form id="payment-form" method="POST" action="{{ URL::to('paypal') }}">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Total Price: {{$total}}</h1>
+                        <h1>Total Price: {{$total}} $</h1>
                         <input type="hidden" value="{{$total}}" name="total">
                     </div>
                 </div>

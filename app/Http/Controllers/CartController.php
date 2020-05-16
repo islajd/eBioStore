@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -103,6 +104,22 @@ class CartController extends Controller
     }
 
     public function checkout(){
+        $c = new CartController();
+        $carts = $c->getCart();
+        try{
+            foreach ($carts as $cart) {
+                $product = Product::findOrFail($cart->product_id);
+                if ($cart->amount > $product->stock || $cart->amount == 0) {
+                    return redirect('cart')->with('status','Wrong Quantity Values');
+                }
+            }
+        }
+        catch (ModelNotFoundException $e){
+            return redirect('cart')->with('status','Something went wrong');
+        }
+        if(count($carts)==0){
+            return redirect('cart')->with('status','Cart Empty');
+        }
         $userId = Auth::user()->id;
         $products = DB::table('carts')
             ->join('products','carts.product_id','=','products.id')
@@ -119,48 +136,7 @@ class CartController extends Controller
     }
 
 
-    public function createOrder(Request $request){
-        $carts = $this->getCart();
-        if(count($carts)==0){
-            return redirect('cart')->with('status','Cart Empty');
-        }
-        else{
-            try{
-                foreach ($carts as $cart) {
-                    $product = Product::findOrFail($cart->product_id);
-                    if ($cart->amount > $product->stock || $cart->amount == 0) {
-                        return redirect('cart')->with('status','Order Not Completed');
-                    }
-                }
-            }
-            catch (ModelNotFoundException $e){
-                return redirect('cart')->with('status','Order Not Completed');
-            }
 
-            $userId = Auth::user()->id;
-            $order = new Order();
-            $order->user_id = $userId;
-            $order->date = now();
-            $order->status = 'SEND';
-            $order->address = $request->input('address');
-            $order->save();
-
-            foreach ($carts as $cart){
-                $order_detail = new Order_Details();
-                $order_detail->order_id = $order->id;
-                $order_detail->product_id = $cart->product_id;
-                $order_detail->quantity = $cart->amount;
-                $product = Product::where('id',$cart->product_id)->first();
-                $order_detail->price = $product->price;
-                $order_detail->save();
-
-                $product->stock -= $cart->amount;
-                $product->update();
-            }
-            $this->emptyCart();
-            return redirect('profile')->with('status','Order Completed');
-        }
-    }
 
     public function getCart(){
         $userId = Auth::user()->id;

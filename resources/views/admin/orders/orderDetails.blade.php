@@ -30,10 +30,10 @@
                             @foreach($order_details as $detail)
                                 <tr>
                                     <td>{{ $detail->name }}</td>
-                                    <td>{{ $detail->price }}</td>
+                                    <td>{{ $detail->price }} $</td>
                                     <td>{{ $detail->quantity }} {{ $detail->measurement_name }}</td>
                                     <td>{{ $detail->description }} </td>
-                                    <td>{{ $detail->image }}</td>
+                                    <td><img src="{{ asset('/storage/product_images/'.$detail->image) }}" width="50" height="50"></td>
                                     <td>{{ $detail->category_name }}</td>
                                 </tr>
                             @endforeach

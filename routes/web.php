@@ -48,7 +48,6 @@ Route::group(['middleware' => ['auth']],function(){
     Route::delete('/cart/delete/{productId}/product','CartController@deleteProductAtCart');
     Route::post('/cart/{productId}/changeAmount','CartController@changeAmount');
     Route::get('/checkout','CartController@checkout')->name('checkout');
-    Route::post('/order/create','CartController@createOrder'); // After PayPal Success
 
     // Should Be in Single Product Page To Add a Product To Cart
     Route::post('/cart/addToCart/{productId}','CartController@addToCart');

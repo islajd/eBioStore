@@ -102,7 +102,7 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{ $product->name }}</td>
-                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->price }} $</td>
                                     <td><img src="{{ asset('/storage/product_images/'.$product->image) }}" width="50" height="50"></td>
                                     <td>{{ $product->description }}</td>
                                     <td>{{ $product->stock }} {{$product->measurement_name}}</td>

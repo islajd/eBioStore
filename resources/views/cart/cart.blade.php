@@ -28,7 +28,7 @@
                 <tr>
                     <td><img src="{{ asset('/storage/product_images/'.$product->image) }}" width="50px" height="50px"></td>
                     <td>{{$product->name}}</td>
-                    <td> <input type="number"  id="price" value="{{$product->price}}" hidden> {{$product->price}} ALL</td>
+                    <td> <input type="number"  id="price" value="{{$product->price}}" hidden> {{$product->price}} $</td>
                     <td>
                         <form method="POST" action="cart/{{$product->product_id}}/changeAmount">
                             {{ csrf_field() }}
