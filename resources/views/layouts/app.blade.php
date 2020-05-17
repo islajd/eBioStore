@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('logo.png') }}">
 
     <title>{{ config('app.name', 'E-Bio Store') }}</title>
 
@@ -111,9 +112,12 @@
         </div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{route("Home")}}">
-                    {{ config('app.name', 'E-Bio Store') }}
-                </a>
+                <div>
+                    <a class="navbar-brand" href="{{route("Home")}}">
+                        <img src="{{ asset('logo.png') }}" style="max-width: 35px;">
+                        {{ config('app.name', 'E-Bio Store') }}
+                    </a>
+                </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
