@@ -19,7 +19,6 @@ class ProductController extends Controller
     | Guest Operations
     |--------------------------------------------------------------------------
     */
-
     public function getProduct($id){
         $product = DB::table('products')
             ->join('categories','products.category_id','=','categories.id')

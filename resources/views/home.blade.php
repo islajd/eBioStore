@@ -118,7 +118,7 @@
                 @endforeach
             </div>
             <div class="row justify-content-center">
-                {{$products}}
+                {{$products->withQueryString()->links()}}
             </div>
         </div>
     </div>
