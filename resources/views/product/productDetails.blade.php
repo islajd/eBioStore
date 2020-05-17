@@ -16,7 +16,7 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <p style=" color: #FF980F;font-size: 26px;font-weight: bold;padding-top: 20px;"> Price: {{$product->price}} LEK </p>
+                                <p style=" color: #FF980F;font-size: 26px;font-weight: bold;padding-top: 20px;"> Price: {{$product->price}}$</p>
                             </div>
                             <div class="row">
                                 <p> <b>Description: </b> {{$product->description}} </p>

@@ -115,7 +115,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @if(Route::current()->getName() == 'Home')
+                        @if(Route::current()->getName() == 'Home'
+                         || Route::current()->getName() == 'Category')
                             <li class="nav-item dropdown">
                                 <div class="d-flex justify-content-center">
                                     <div class="searchbar">
