@@ -21,11 +21,11 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Product Name:</label>
-                            <input type="text" name="name" class="form-control" id="recipient-name">
+                            <input type="text" name="name" class="form-control" id="recipient-name" required>
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Price:</label>
-                            <input type="number" name="price" class="form-control" id="recipient-name">
+                            <input type="number" step="0.01" name="price" class="form-control" id="recipient-name" required>
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Stock:</label>
