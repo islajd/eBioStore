@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('measurement_id')->unsigned();
             $table->foreign('measurement_id')->references('id')->on('measurement_types');
+            $table->integer('status')->default(1);
             // Created_At Will Be Used As Date
             $table->timestamps();
         });

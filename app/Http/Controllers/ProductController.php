@@ -94,7 +94,7 @@ class ProductController extends Controller
             ->join('categories','products.category_id','=','categories.id')
             ->join('measurement_types','products.measurement_id','=','measurement_types.id')
             ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
-                'products.description as description','products.stock as stock','products.created_at as date',
+                'products.description as description','products.stock as stock','products.created_at as date','products.status as status',
                 'products.measurement_id as measurement_id','measurement_types.name as measurement_name',
                 'products.category_id as category_id','categories.name as category_name')
             ->get();
@@ -183,10 +183,19 @@ class ProductController extends Controller
     public function deleteProduct($id){
         try{
             $product = Product::findOrFail($id);
-            $productImage = $product->image; // because if product delete we need to save image path to delete
-            $product->delete();
-            Storage::delete('public/product_images/'.$productImage);
-            return redirect('products')->with('status','Product Deleted');
+//            $productImage = $product->image; // because if product delete we need to save image path to delete
+//            $product->delete();
+//            Storage::delete('public/product_images/'.$productImage);
+            if($product->status == 0){
+                $product->status = 1;
+                $product->update();
+                return redirect('products')->with('status','Product Enabled');
+            }
+            else{
+                $product->status = 0;
+                $product->update();
+                return redirect('products')->with('status','Product Deleted');
+            }
         }
         catch (ModelNotFoundException $e){
             return redirect('products')->with('error','Product Not Found');

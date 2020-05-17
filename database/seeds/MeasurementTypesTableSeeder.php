@@ -16,7 +16,7 @@ class MeasurementTypesTableSeeder extends Seeder
         ]);
 
         DB::table('measurement_types')->insert([
-            'name' => 'Cope'
+            'name' => 'Pieces'
         ]);
     }
 }

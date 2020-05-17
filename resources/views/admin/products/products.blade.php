@@ -114,8 +114,12 @@
                                     <td>
                                         <form action="/product/{{ $product->product_id }}/delete" method="POST">
                                             {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-danger">DELETE</button>
+                                            {{ method_field('PUT') }}
+                                            @if($product->status == 1)
+                                                <button type="submit" class="btn btn-danger">DELETE</button>
+                                            @else
+                                                <button type="submit" class="btn btn-primary">ENABLE</button>
+                                            @endif
                                         </form>
                                     </td>
                                 </tr>

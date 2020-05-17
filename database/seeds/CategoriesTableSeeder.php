@@ -12,7 +12,28 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'name' => 'Te Tjera'
+            'name' => 'Fruits',
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Vegetables',
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Grains',
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Legumes',
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Nuts and Seeds',
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Meats and Poultry',
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Spices',
+        ]);
+        DB::table('categories')->insert([
+            'name' => 'Others',
         ]);
     }
 }

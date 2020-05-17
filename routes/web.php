@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth','admin']],function(){
     Route::post('/product/save','ProductController@saveProduct');
     Route::get('/product/{id}/edit','ProductController@editProduct');
     Route::put('/product/{id}/update','ProductController@updateProduct');
-    Route::delete('/product/{id}/delete','ProductController@deleteProduct');
+    Route::put('/product/{id}/delete','ProductController@deleteProduct');
 
     Route::get('/categories','CategoryController@getCategories');
     Route::post('/category/save','CategoryController@saveCategory');
