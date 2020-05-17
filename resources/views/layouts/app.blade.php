@@ -118,12 +118,15 @@
                         @if(Route::current()->getName() == 'Home'
                          || Route::current()->getName() == 'Category')
                             <li class="nav-item dropdown">
-                                <div class="d-flex justify-content-center">
-                                    <div class="searchbar">
-                                        <input class="search_input" type="text" name="" placeholder="Search...">
-                                        <a href="#" class="search_icon"><i class="fa fa-search icon"></i></a>
+                                <form action="{{route("Search")}}" method="POST" id="search">
+                                    {{ csrf_field() }}
+                                    <div class="d-flex justify-content-center">
+                                        <div class="searchbar">
+                                                <input class="search_input" type="text" name="product" placeholder="Search...">
+                                                <a class="search_icon" onclick="document.getElementById('search').submit();"><i class="fa fa-search icon"></i></a>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </li>
                         @endif
                         <li class="nav-item dropdown">

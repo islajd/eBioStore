@@ -47,6 +47,7 @@ class ProductController extends Controller
             ->join('measurement_types','products.measurement_id','=','measurement_types.id')
             ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
             ->where('category_id',$id)
+            ->where('products.status','1')
             ->get();
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
@@ -66,6 +67,7 @@ class ProductController extends Controller
             ->join('categories','products.category_id','=','categories.id')
             ->join('measurement_types','products.measurement_id','=','measurement_types.id')
             ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
+            ->where('products.status','1')
             ->get();
 
         $categories = Category::all();
@@ -83,6 +85,32 @@ class ProductController extends Controller
             'measurement_types'=>$measurement_types
         ]);
     }
+
+    public function searchProduct(Request $request){
+        $name = $request->get('product');
+
+        $products = DB::table('products')
+            ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
+                'products.description as description','products.stock as stock','products.created_at as date',
+                'products.measurement_id as measurement_id','measurement_types.name as measurement_name',
+                'products.category_id as category_id','categories.name as category_name', 'productOrders.sold')
+            ->join('categories','products.category_id','=','categories.id')
+            ->join('measurement_types','products.measurement_id','=','measurement_types.id')
+            ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
+            ->where('products.name','like','%'. $name . '%')
+            ->orWhere('categories.name','like','%'. $name . '%')
+            ->where('products.status','1')
+            ->get();
+        $categories = Category::all();
+        $measurement_types = MeasurementType::all();
+        return view('home')->with([
+            'products'=>$products,
+            'categories'=>$categories,
+            'measurement_types'=>$measurement_types
+        ]);
+    }
+
+
     /*
     |--------------------------------------------------------------------------
     | Admin Operations

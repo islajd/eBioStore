@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Console\Input\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'ProductController@listProducts')->name("Home");
 Route::get('/category/{id}', 'ProductController@getProductsByCategory')->name("Category");
 Route::get('/product/{id}', 'ProductController@getProduct');
+Route::post('/search', 'ProductController@searchProduct')->name("Search");
 
 Auth::routes();
 
