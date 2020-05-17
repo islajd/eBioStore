@@ -17,7 +17,7 @@ use Symfony\Component\Console\Input\Input;
 Route::get('/', 'ProductController@listProducts')->name("Home");
 Route::get('/category/{id}', 'ProductController@getProductsByCategory')->name("Category");
 Route::get('/product/{id}', 'ProductController@getProduct');
-Route::post('/search', 'ProductController@searchProduct')->name("Search");
+Route::get('/search', 'ProductController@searchProduct')->name("Search");
 
 Auth::routes();
 

@@ -72,6 +72,18 @@
             border-radius: 50%;
             text-decoration:none;
         }
+        .filter_icon{
+            height: 30px;
+            width: 30px;
+            float: right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration:none;
+            background-color: lightgray;
+            color: white;
+        }
     </style>
 </head>
 <body style="background-color: white">
@@ -102,10 +114,6 @@
                 <a class="navbar-brand" href="{{route("Home")}}">
                     {{ config('app.name', 'E-Bio Store') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
@@ -119,7 +127,7 @@
                          || Route::current()->getName() == 'Category'
                          || Route::current()->getName() == 'Search' )
                             <li class="nav-item dropdown">
-                                <form action="{{route("Search")}}" method="POST" id="search">
+                                <form action="{{route("Search")}}" method="GET" id="search">
                                     {{ csrf_field() }}
                                     <div class="d-flex justify-content-center">
                                         <div class="searchbar">

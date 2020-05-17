@@ -37,13 +37,14 @@ class ProductController extends Controller
         ]);
     }
 
-    public function getProductsByCategory(Request $request,$id){
+    public function getProductsByCategory($id){
         $order = "name";
         $type = "ASC";
-        if($request->has(['order','type'])){
-            $order = $request->get('order');
-            $type = $request->get('type');
+        if(isset($_GET['o']) && isset($_GET['t'])){
+            $order = $_GET['o'];
+            $type = $_GET['t'];
         }
+
         $products = DB::table('products')
             ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
                 'products.description as description','products.stock as stock','products.created_at as date',
@@ -55,7 +56,7 @@ class ProductController extends Controller
             ->where('category_id',$id)
             ->where('products.status','1')
             ->orderBy($order,$type)
-            ->get();
+            ->paginate(24);
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
         return view('home')->with([
@@ -68,9 +69,9 @@ class ProductController extends Controller
     public function listProducts(Request $request){
         $order = "name";
         $type = "ASC";
-        if($request->has(['order','type'])){
-            $order = $request->get('order');
-            $type = $request->get('type');
+        if(isset($_GET['o']) && isset($_GET['t'])){
+            $order = $_GET['o'];
+            $type = $_GET['t'];
         }
         $products = DB::table('products')
             ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
@@ -82,8 +83,7 @@ class ProductController extends Controller
             ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
             ->where('products.status','1')
             ->orderBy($order,$type)
-            ->get();
-
+            ->paginate(24);
 
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
@@ -103,10 +103,10 @@ class ProductController extends Controller
 
     public function searchProduct(Request $request){
         $order = "name";
-        $type = "DESC";
-        if($request->has(['order','type'])){
-            $order = $request->get('order');
-            $type = $request->get('type');
+        $type = "ASC";
+        if(isset($_GET['o']) && isset($_GET['t'])){
+            $order = $_GET['o'];
+            $type = $_GET['t'];
         }
         $name = $request->get('product');
 
@@ -123,7 +123,7 @@ class ProductController extends Controller
             ->orWhere('categories.name','like','%'. $name . '%')
             ->where('products.status','1')
             ->orderBy($order,$type)
-            ->get();
+            ->paginate(24);
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
         return view('home')->with([
