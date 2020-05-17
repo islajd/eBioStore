@@ -97,6 +97,7 @@ class ProductController extends Controller
             ->join('categories','products.category_id','=','categories.id')
             ->join('measurement_types','products.measurement_id','=','measurement_types.id')
             ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
+            ->where('products.status','1')
             ->where('products.name','like','%'. $name . '%')
             ->orWhere('categories.name','like','%'. $name . '%')
             ->where('products.status','1')
