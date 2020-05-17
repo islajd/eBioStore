@@ -35,7 +35,12 @@
                                     <a href="/product/{{$product->product_id}}" class="anchorjs-link"><h5 class="card-title">{{$product->name}}</h5></a>
                                 </div>
                                 <div class="row justify-content-between" >
-                                    <i>{{$product->sold}} <span>orders</span> </i>
+                                    @if($product->sold)
+                                        <i>{{$product->sold}} <span>orders</span> </i>
+                                    @else
+                                        <i>0 <span>orders</span> </i>
+                                    @endif
+
                                     <b style="color: green">${{$product->price}}</b>
                                 </div>
                                 <div class="row">

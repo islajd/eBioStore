@@ -23,11 +23,12 @@
             text-decoration: none;
         }
         footer {
-            position: absolute;
-            left: 0;
-            bottom: 0;
+            position: relative;
             height: 100px;
             width: 100%;
+        }
+        #app{
+            min-height: 100vh;
         }
     </style>
 </head>

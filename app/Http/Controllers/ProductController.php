@@ -45,7 +45,7 @@ class ProductController extends Controller
                 'products.category_id as category_id','categories.name as category_name', 'productOrders.sold')
             ->join('categories','products.category_id','=','categories.id')
             ->join('measurement_types','products.measurement_id','=','measurement_types.id')
-            ->join(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
+            ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
             ->where('category_id',$id)
             ->get();
         $categories = Category::all();
@@ -65,7 +65,7 @@ class ProductController extends Controller
                 'products.category_id as category_id','categories.name as category_name', 'productOrders.sold')
             ->join('categories','products.category_id','=','categories.id')
             ->join('measurement_types','products.measurement_id','=','measurement_types.id')
-            ->join(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
+            ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
             ->get();
 
         $categories = Category::all();
