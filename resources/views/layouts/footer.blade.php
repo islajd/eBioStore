@@ -1,5 +1,5 @@
 <footer class="footer">
-    <div style="background-color: #21d192;">
+    <div style="background-color: #38c172 !important">
         <div class="container">
             <div class="row py-4 d-flex align-items-center">
                 <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
@@ -70,11 +70,11 @@
                 <h6 class="text-uppercase font-weight-bold">Contact</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <i class="fa fa-map-marker mr-3"></i>Tirane, 1057, AL</p>
+                    <i class="fa fa-map-marker icon mr-3"></i>Tirane, 1057, AL</p>
                 <p>
-                    <i class="fa fa-envelope mr-3"></i>ebiostoresupp@gmail.com</p>
+                    <i class="fa fa-envelope icon mr-3"></i>ebiostoresupp@gmail.com</p>
                 <p>
-                    <i class="fa fa-phone mr-3"></i>+35569 3435 333</p>
+                    <i class="fa fa-phone icon mr-3"></i>+35569 3435 333</p>
             </div>
         </div>
     </div>

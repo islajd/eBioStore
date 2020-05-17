@@ -30,6 +30,48 @@
         #app{
             min-height: 100vh;
         }
+        .icon{
+            color:#38c172 !important;
+        }
+
+        /*=================*/
+        .search_input{
+            border: 0;
+            outline: 0;
+            background: none;
+            width: 0;
+            caret-color:transparent;
+            line-height: 40px;
+            transition: width 0.4s linear;
+            color: #38c172 !important;
+        }
+
+        .searchbar:hover{
+            border-bottom: 1px solid #ccc!important;
+        }
+
+        .searchbar:hover > .search_input{
+            padding-left: 10px;
+            width: 250px;
+            caret-color:#38c172 !important;
+            transition: width 0.4s linear;
+        }
+
+        .searchbar:hover > .search_icon{
+            background: white;
+            color: #e74c3c;
+        }
+
+        .search_icon{
+            height: 40px;
+            width: 40px;
+            float: right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration:none;
+        }
     </style>
 </head>
 <body style="background-color: white">
@@ -73,24 +115,34 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @if(Route::current()->getName() == 'Home')
+                            <li class="nav-item dropdown">
+                                <div class="d-flex justify-content-center">
+                                    <div class="searchbar">
+                                        <input class="search_input" type="text" name="" placeholder="Search...">
+                                        <a href="#" class="search_icon"><i class="fa fa-search icon"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                        @endif
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{route("Home")}}"><i class="fa fa-home"></i> Home </a>
+                            <a class="nav-link" href="{{route("Home")}}"><i class="fa fa-home icon"></i> Home </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{route("Support")}}"><i class="fa fa-support"></i> Support</a>
+                            <a class="nav-link" href="{{route("Support")}}"><i class="fa fa-support icon"></i> Support</a>
                         </li>
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" style="color: green" data-toggle="modal" data-target="#modalLoginForm">{{ __('Login') }}</a>
+                                <a class="nav-link" style="color: #38c172 !important" data-toggle="modal" data-target="#modalLoginForm">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" style="color: green" data-toggle="modal" data-target="#modalRegisterForm">{{ __('Register') }}</a>
+                                    <a class="nav-link" style="color: #38c172 !important" data-toggle="modal" data-target="#modalRegisterForm">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="{{route("Cart")}}"><i class="fa fa-shopping-cart"></i> Cart</a>
+                                <a class="nav-link" href="{{route("Cart")}}"><i class="fa fa-shopping-cart icon"></i> Cart</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

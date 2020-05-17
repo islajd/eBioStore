@@ -1,7 +1,7 @@
 <div class="col-md-2">
     <div class="card">
         <div class="card-header">
-            <i class="fa fa-list"></i>
+            <i class="fa fa-list icon"></i>
             <span>Categories</span>
         </div>
         <div class="card-body">
