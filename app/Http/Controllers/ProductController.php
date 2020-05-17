@@ -104,6 +104,7 @@ class ProductController extends Controller
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
         return view('home')->with([
+            'searched'=>$name,
             'products'=>$products,
             'categories'=>$categories,
             'measurement_types'=>$measurement_types

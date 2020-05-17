@@ -116,13 +116,14 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @if(Route::current()->getName() == 'Home'
-                         || Route::current()->getName() == 'Category')
+                         || Route::current()->getName() == 'Category'
+                         || Route::current()->getName() == 'Search' )
                             <li class="nav-item dropdown">
                                 <form action="{{route("Search")}}" method="POST" id="search">
                                     {{ csrf_field() }}
                                     <div class="d-flex justify-content-center">
                                         <div class="searchbar">
-                                                <input class="search_input" type="text" name="product" placeholder="Search...">
+                                                <input class="search_input" type="text" name="product" placeholder="Search..." @isset($searched) value="{{$searched}}"@endisset>
                                                 <a class="search_icon" onclick="document.getElementById('search').submit();"><i class="fa fa-search icon"></i></a>
                                         </div>
                                     </div>
