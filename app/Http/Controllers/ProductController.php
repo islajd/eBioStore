@@ -37,7 +37,13 @@ class ProductController extends Controller
         ]);
     }
 
-    public function getProductsByCategory($id){
+    public function getProductsByCategory(Request $request,$id){
+        $order = "name";
+        $type = "ASC";
+        if($request->has(['order','type'])){
+            $order = $request->get('order');
+            $type = $request->get('type');
+        }
         $products = DB::table('products')
             ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
                 'products.description as description','products.stock as stock','products.created_at as date',
@@ -48,6 +54,7 @@ class ProductController extends Controller
             ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
             ->where('category_id',$id)
             ->where('products.status','1')
+            ->orderBy($order,$type)
             ->get();
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
@@ -58,7 +65,13 @@ class ProductController extends Controller
         ]);
     }
 
-    public function listProducts(){
+    public function listProducts(Request $request){
+        $order = "name";
+        $type = "ASC";
+        if($request->has(['order','type'])){
+            $order = $request->get('order');
+            $type = $request->get('type');
+        }
         $products = DB::table('products')
             ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
                 'products.description as description','products.stock as stock','products.created_at as date',
@@ -68,7 +81,9 @@ class ProductController extends Controller
             ->join('measurement_types','products.measurement_id','=','measurement_types.id')
             ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
             ->where('products.status','1')
+            ->orderBy($order,$type)
             ->get();
+
 
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
@@ -87,6 +102,12 @@ class ProductController extends Controller
     }
 
     public function searchProduct(Request $request){
+        $order = "name";
+        $type = "DESC";
+        if($request->has(['order','type'])){
+            $order = $request->get('order');
+            $type = $request->get('type');
+        }
         $name = $request->get('product');
 
         $products = DB::table('products')
@@ -101,6 +122,7 @@ class ProductController extends Controller
             ->where('products.name','like','%'. $name . '%')
             ->orWhere('categories.name','like','%'. $name . '%')
             ->where('products.status','1')
+            ->orderBy($order,$type)
             ->get();
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
