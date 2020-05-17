@@ -28,7 +28,7 @@
             @endif
             <div class="row pt-4">
                     @foreach($products as $product)
-                        <div class="card m-4 bg-transparent " style="width: 20%;">
+                        <div class="card m-4 bg-transparent" style="width: 20%;">
                             <img src="{{ asset('/storage/product_images/'.$product->image) }}" class="card-img-top" alt="..." width="100" height="150">
                             <div class="card-body mt-2 mr-2 ml-2">
                                 <div class="row">

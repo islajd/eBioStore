@@ -72,7 +72,7 @@ class UserController extends Controller
                 return redirect('profile')->with('error','Please Complete Fields');
             }
             if($new_password != $confirm_password){
-                return redirect('profile')->with('status','Password Not Match');
+                return redirect('profile')->with('error','Password Not Match');
             }
             if(Hash::check($old_password,$user->password)){
                 $user->password = Hash::make($new_password);

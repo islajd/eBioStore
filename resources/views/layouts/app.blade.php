@@ -22,6 +22,13 @@
         a:hover{
             text-decoration: none;
         }
+        footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 100px;
+            width: 100%;
+        }
     </style>
 </head>
 <body style="background-color: white">
@@ -122,5 +129,6 @@
         @yield('checkout')
         @yield('content')  {{-- For Auth Routes --}}
     </div>
+    @include('layouts.footer')
 </body>
 </html>
