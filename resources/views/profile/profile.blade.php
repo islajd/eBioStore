@@ -16,9 +16,9 @@
             <li class="nav-item"><a href="#password" data-toggle="tab" class="nav-link">Password</a></li>
             <li class="nav-item"><a href="#orders" data-toggle="tab" class="nav-link">My Orders</a></li>
         </ul>
-        <div id="myTabContent" class="tab-content">
-            <div class="tab-pane active in" id="profileDetails" role="tabpanel" aria-labelledby="home-tab">
-                <form id="tab" method="POST" action="user/edit">
+        <div class="tab-content">
+            <div class="tab-pane active in" id="profileDetails">
+                <form method="POST" action="user/edit">
                     {{ csrf_field() }}
                     <br>
                     <label>First Name</label>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="tab-pane fade" id="password">
-                <form id="tab2" action="user/changePassword" method="POST">
+                <form action="user/changePassword" method="POST">
                     {{ csrf_field() }}
                     <br>
                     <label>Old Password</label>

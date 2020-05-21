@@ -1,11 +1,9 @@
 @extends('layouts.app')
 
 @section('checkout')
-    <div class="card bg-light mb-3" style="max-width: 40rem; float: none; margin: 0 auto 10px;">
-        <div class="card-header">
-            Checkout
-        </div>
-        <div class="card-body">
+
+    <div class="container">
+        <div>
             @if(session('success'))
                 <div class="alert alert-success">
                     {{session('success')}}
@@ -15,32 +13,54 @@
                     {{session('error')}}
                 </div>
             @endif
+        </div>
+        <form method="POST" action="{{ URL::to('paypal') }}">
+            {{ csrf_field() }}
 
-{{--            <form id="contact-form" method="post" action="order/create">--}}
-            <form id="payment-form" method="POST" action="{{ URL::to('paypal') }}">
-                {{ csrf_field() }}
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>Total Price: {{$total}} $</h1>
-                        <input type="hidden" value="{{$total}}" name="total">
-                    </div>
-                </div>
-                <div class="row">
+            <div class="row justify-content-center">
+                <div class="col-xl-7">
+                    <br>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <textarea id="address" name="address" class="form-control" placeholder="Your Address *" rows="4" required="required" data-error="Please, leave us address."></textarea>
+                            <textarea id="address" name="address" class="form-control" placeholder="Your Address *" rows="8" required="required" data-error="Please, leave us address."></textarea>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="submit" class="btn btn-success btn-send" value="Pay with PayPal">
+                <div class="col-xl-5">
+                    <div class="row mt-5 pt-3">
+                        <div class="col-md-12 d-flex mb-5">
+                            <div class="p-3 p-md-4">
+                                <h3 class="mb-4">Cart Total</h3>
+                                <hr>
+                                <p class="d-flex">
+                                    <span><b>Total</b> ${{$total}}</span>
+                                    <input type="hidden" value="{{$total}}" name="total">
+                                </p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+            <div class="p-3 p-md-4">
+                <h3 class="mb-4">Payment Method</h3>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="radio">
+                            <label><input type="radio" checked='checked' name="payPalRadio" class="mr-2"> PayPal</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary py-3 px-4" value="Place an order">
+                        <a href="cart" class="btn btn-secondary py-3 px-4">Back To Cart</a>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
 @endsection
