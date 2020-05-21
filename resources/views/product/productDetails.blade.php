@@ -22,7 +22,7 @@
                                 <p> <b>Description: </b> {{$product->description}} </p>
                             </div>
                             <div class="row">
-                                <p><b> Availability: </b> {{$product->stock}} </p>
+                                <p><b> Availability: </b> {{$product->stock}}  {{$product->measurement_name}}</p>
                             </div>
                             <div class="row">
                                 <div class="input-group">
