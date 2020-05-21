@@ -22,6 +22,7 @@
     <style>
         a:hover{
             text-decoration: none;
+            cursor: pointer;
         }
         footer {
             position: relative;
