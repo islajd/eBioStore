@@ -24,11 +24,16 @@ class ProductController extends Controller
             ->join('categories','products.category_id','=','categories.id')
             ->join('measurement_types','products.measurement_id','=','measurement_types.id')
             ->select('products.id as product_id','products.name as name','products.price as price','products.image as image',
-                'products.description as description','products.stock as stock','products.created_at as date',
+                'products.description as description','products.stock as stock','products.created_at as date','products.status',
                 'products.measurement_id as measurement_id','measurement_types.name as measurement_name',
                 'products.category_id as category_id','categories.name as category_name')
             ->where('products.id',$id)
+            ->where('status',1)
             ->first();
+
+        if(!$product){
+            return redirect()->route('home');
+        }
 
         return view('product.productDetails')->with([
             'product'=>$product,
@@ -65,7 +70,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function listProducts(Request $request){
+    public function listProducts(){
         $order = "name";
         $type = "ASC";
         if(isset($_GET['o']) && isset($_GET['t'])){

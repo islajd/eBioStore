@@ -68,7 +68,7 @@ class OrderController extends Controller
                 ->join('measurement_types','products.measurement_id','=','measurement_types.id')
                 ->select(
                     'order_details.id','order_details.price',
-                    'order_details.quantity','products.name as name',
+                    'order_details.quantity','products.name as name','products.id as product_id',
                     'products.image as image', 'products.description as description',
                     'measurement_types.name as measure'
                 )
