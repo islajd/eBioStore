@@ -21,7 +21,7 @@
                 @foreach($order_detail as $od)
                     <tr>
                         <td><img src="{{ asset('/storage/product_images/'.$od->image) }}" width="50px" height="50px"> </td>
-                        <td><a href="/product/{{$od->product_id}}">{{$od->name}}</a></td>
+                        <td><a href=" {{route("Product",["id" => $od->product_id])}}">{{$od->name}}</a></td>
                         <td>{{$od->description}}</td>
                         <td>{{$od->quantity}} {{$od->measure}}</td>
                         <td>{{$od->price}} $</td>

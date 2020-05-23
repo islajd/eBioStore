@@ -79,7 +79,7 @@
                             <td>{{$order->address}}</td>
                             <td>{{$order->status}}</td>
                             <td>
-                                <a href="/myOrder/{{ $order->id }}/details" class="btn btn-primary">Details</a>
+                                <a href="{{route("MyOrder", [ "orderId" => $order->id ])}}" class="btn btn-primary">Details</a>
                             </td>
                         </tr>
                     @endforeach

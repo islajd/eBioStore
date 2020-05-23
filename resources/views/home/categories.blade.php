@@ -9,7 +9,7 @@
                 @foreach($categories as $category)
                     <li class="list-group-item pl-0" style="color:{{ 'category/'.$category->id == request()->path() ? 'green': '' }}">
                         <i class="fa fa-angle-right" style="font-size: 15px;"></i>
-                        <a href="/category/{{$category->id}}" class="pl-1" style="color:{{ 'category/'.$category->id == request()->path() ? 'green': '' }}">{{$category->name}}</a>
+                        <a href="{{route('Category',["id" => $category->id])}}" class="pl-1" style="color:{{ 'category/'.$category->id == request()->path() ? 'green': '' }}">{{$category->name}}</a>
                     </li>
                 @endforeach
             </ul>

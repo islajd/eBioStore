@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\Input;
 
 Route::get('/', 'ProductController@listProducts')->name("Home");
 Route::get('/category/{id}', 'ProductController@getProductsByCategory')->name("Category");
-Route::get('/product/{id}', 'ProductController@getProduct');
+Route::get('/product/{id}', 'ProductController@getProduct')->name("Product");
 Route::get('/search', 'ProductController@searchProduct')->name("Search");
 
 Auth::routes();
@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('/cart/addToCart/{productId}','CartController@addToCart');
 
     // Get Orders Details For An Order
-    Route::get('/myOrder/{orderId}/details','OrderController@getDetailsForAnUserOrder');
+    Route::get('/myOrder/{orderId}/details','OrderController@getDetailsForAnUserOrder')->name("MyOrder");
 
     // They Are Used For User Profile To Show User Profile,To Change Details and To Change Password
     Route::get('/profile','UserController@getProfile')->name('profile');

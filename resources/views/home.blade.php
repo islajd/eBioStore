@@ -99,7 +99,7 @@
                         <img src="{{ asset('/storage/product_images/'.$product->image) }}" class="card-img-top" alt="..." width="100" height="150">
                         <div class="card-body mt-2 mr-2 ml-2">
                             <div class="row">
-                                <a href="/product/{{$product->product_id}}" class="anchorjs-link"><h5 class="card-title">{{$product->name}}</h5></a>
+                                <a href="{{route('Product',["id" => $product->product_id])}}" class="anchorjs-link"><h5 class="card-title">{{$product->name}}</h5></a>
                             </div>
                             <div class="row justify-content-between" >
                                 @if($product->sold)
@@ -111,7 +111,8 @@
                                 <b style="color: green">${{$product->price}}</b>
                             </div>
                             <div class="row">
-                                <a href="/category/{{$product->category_id}}"> <i class="fa fa-angle-right" style="font-size: 15px;"></i> {{$product->category_name}}</a>
+                                <a href="{{route("Category",["id" => $product->category_id])}}"> <i class="fa fa-angle-right" style="font-size: 15px;"></i> {{$product->category_name}}</a>
+
                             </div>
                         </div>
                     </div>
