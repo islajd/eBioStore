@@ -87,7 +87,7 @@ class UserController extends Controller
             return redirect('profile')->with('error','User Not Found');
         }
         catch (QueryException $e){
-            return redirect('profile')->with('error','Fields Cannot Be Null');
+            return redirect('profile')->with('error','Something went wrong');
         }
     }
 
