@@ -38,7 +38,6 @@ class CartController extends Controller
             $cart->user_id = $userId;
             $cart->product_id = $productId;
             $cart->amount = $amount;
-            $cart->amount = $amount;
             $cart->save();
             return back()->with('status','Success');
         }

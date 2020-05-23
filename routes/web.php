@@ -14,6 +14,8 @@ use Symfony\Component\Console\Input\Input;
 |
 */
 
+//www.EBioStore.com/search
+
 Route::get('/', 'ProductController@listProducts')->name("Home");
 Route::get('/category/{id}', 'ProductController@getProductsByCategory')->name("Category");
 Route::get('/product/{id}', 'ProductController@getProduct')->name("Product");

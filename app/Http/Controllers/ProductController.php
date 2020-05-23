@@ -60,7 +60,7 @@ class ProductController extends Controller
             ->where('category_id',$id)
             ->where('products.status','1')
             ->orderBy($order,$type)
-            ->paginate(24);
+            ->paginate(16);
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
         return view('home')->with([
@@ -87,7 +87,7 @@ class ProductController extends Controller
             ->leftJoin(DB::raw('(select product_id, count(*) as sold from order_details group by product_id) productOrders'), 'productOrders.product_id','=','products.id')
             ->where('products.status','1')
             ->orderBy($order,$type)
-            ->paginate(24);
+            ->paginate(16);
 
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
@@ -127,7 +127,7 @@ class ProductController extends Controller
             ->orWhere('categories.name','like','%'. $name . '%')
             ->where('products.status','1')
             ->orderBy($order,$type)
-            ->paginate(24);
+            ->paginate(16);
         $categories = Category::all();
         $measurement_types = MeasurementType::all();
         return view('home')->with([
