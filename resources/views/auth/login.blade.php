@@ -1,4 +1,6 @@
-<div class="row justify-content-center modal fade" id="modalLoginForm" role="dialog">
+@extends('layouts.app')
+@section('login')
+<div class="row justify-content-center modal fade" id="modalForm" role="dialog">
     <div class="col-md-4 modal-dialog" role="document">
         <div class="card modal-content">
             <div class="modal-header">
@@ -64,3 +66,4 @@
         </div>
     </div>
 </div>
+@endsection

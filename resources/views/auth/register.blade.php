@@ -1,4 +1,6 @@
-<div class="row justify-content-center modal fade" id="modalRegisterForm" role="dialog">
+@extends('layouts.app')
+@section('register')
+    <div class="row justify-content-center modal fade" id="modalForm" role="dialog">
     <div class="col-md-4 modal-dialog" role="document">
         <div class="card modal-content">
             <div class="modal-header">
@@ -10,11 +12,12 @@
                     <div class="form-group row">
                         <div class="col-md-10 offset-md-1 input-group">
                             <input id="first_name" type="text" placeholder="{{"First Name"}}" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
-                            @error('first_name')
-                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                            @enderror
+
+                                @error('first_name')
+                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                @enderror
                         </div>
                     </div>
 
@@ -22,11 +25,12 @@
                         <div class="col-md-10 offset-md-1 input-group">
                             <input id="last_name" type="text" placeholder="{{"Last Name"}}" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
 
-                            @error('last_name')
-                            <span class="invalid-feedback" role="alert">
+                                @error('last_name')
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                            @enderror
+                                @enderror
+
                         </div>
                     </div>
 
@@ -34,23 +38,23 @@
                         <div class="col-md-10 offset-md-1 input-group">
                             <input id="email" type="email" placeholder="{{"Email"}}" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                            @enderror
+                                @enderror
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-md-10 offset-md-1 input-group">
                             <input id="password" type="password" placeholder="{{"Password"}}" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                            @enderror
+                                @enderror
+
                         </div>
                     </div>
 
@@ -84,3 +88,4 @@
         </div>
     </div>
 </div>
+@endsection

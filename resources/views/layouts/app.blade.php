@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -151,11 +152,12 @@
                         </li>
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" style="color: #38c172 !important" data-toggle="modal" data-target="#modalLoginForm">{{ __('Login') }}</a>
+{{--                                <a class="nav-link" style="color: #38c172 !important" data-toggle="modal" data-target="#modalLoginForm" href="{{route('login')}}">{{ __('Login') }}</a>--}}
+                                <a class="nav-link" style="color: #38c172 !important" href="{{route('login')}}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" style="color: #38c172 !important" data-toggle="modal" data-target="#modalRegisterForm">{{ __('Register') }}</a>
+                                    <a class="nav-link" style="color: #38c172 !important" href="{{route('register')}}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -187,10 +189,9 @@
             </div>
         </nav>
         @guest
-            @include('auth.login')
-            @include('auth.register')
+            @yield('login')
+            @yield('register')
         @endguest
-{{--            {{$errors}}--}}
         @yield('home')
         @yield('product')
         @yield('cart')
@@ -198,8 +199,16 @@
         @yield('order_details')
         @yield('support')
         @yield('checkout')
-        @yield('content')  {{-- For Auth Routes --}}
+        @yield('content')
     </div>
     @include('layouts.footer')
+    <script>
+        $(window).on('load',function(){
+            $('#modalForm').modal('show');
+            $('#modalForm').on('hidden.bs.modal', function () {
+                window.location.replace("{{route('Home')}}");
+            });
+        });
+    </script>
 </body>
 </html>
