@@ -38,7 +38,7 @@
                                 <td><img src="{{ asset('/storage/product_images/'.$product->image) }}" width="100px" height="100px" style="border-radius: 50%"></td>
 
                                 <td>
-                                    <h3><a href="/product/{{$product->product_id}}">{{$product->name}}</a> </h3>
+                                    <h3><a href="{{route('Product',['id'=>$product->product_id])}}">{{$product->name}}</a> </h3>
                                     <p>{{$product->description}}</p>
                                 </td>
 
