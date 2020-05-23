@@ -39,12 +39,12 @@
                             @endforeach
                             </tbody>
                             @if($order->status == "SEND")
-                                <form action="/order/{{$order->id}}/changeStatus" method="POST">
+                                <form action="{{route('changeOrderStatus',['orderId'=>$order->id])}}" method="POST">
                                     {{ csrf_field() }}
                                     <button class="btn btn-success">{{ $order->status }}</button>
                                 </form>
                             @else
-                                <form action="/order/{{$order->id}}/changeStatus" method="POST">
+                                <form action="{{route('changeOrderStatus',['orderId'=>$order->id])}}" method="POST">
                                     {{ csrf_field() }}
                                     <button class="btn btn-warning">{{ $order->status }}</button>
                                 </form>

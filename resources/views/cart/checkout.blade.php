@@ -14,7 +14,7 @@
                 </div>
             @endif
         </div>
-        <form method="POST" action="{{ URL::to('paypal') }}">
+        <form method="POST" action="{{ route('PayPal') }}">
             {{ csrf_field() }}
 
             <div class="row justify-content-center">

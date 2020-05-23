@@ -41,7 +41,7 @@
                                 <td>{{ $user->address }}</td>
                                 <td>{{ $user->phone_number }}</td>
                                 <td style="width: 250px;">
-                                    <form action="/user/{{ $user->user_id }}/changeRole" method="POST">
+                                    <form action="{{route('updateUser',["id"=>$user->user_id])}}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
                                         <select name="role" class="form-control" style="display: inline;width: 80px">
@@ -57,7 +57,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="/user/{{ $user->user_id }}/delete" method="POST">
+                                    <form action="{{route('deleteUser',["id"=>$user->user_id])}}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type="submit" class="btn btn-danger">DELETE</button>

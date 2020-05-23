@@ -40,21 +40,21 @@
                                     <td>{{ $order->address}}</td>
                                     @if($order->status == "SEND")
                                         <td>
-                                            <form action="/order/{{$order->id}}/changeStatus" method="POST">
+                                            <form action="{{route('changeOrderStatus',['orderId'=>$order->id])}}" method="POST">
                                                 {{ csrf_field() }}
                                                 <button class="btn btn-success">{{ $order->status }}</button>
                                             </form>
                                         </td>
                                     @else
                                         <td>
-                                            <form action="/order/{{$order->id}}/changeStatus" method="POST">
+                                            <form action="{{route('changeOrderStatus',['orderId'=>$order->id])}}" method="POST">
                                                 {{ csrf_field() }}
                                                 <button class="btn btn-warning">{{ $order->status }}</button>
                                             </form>
                                         </td>
                                     @endif
                                     <td>
-                                        <a href="/order/{{ $order->id }}/details" class="btn btn-secondary">Details</a>
+                                        <a href="{{route('orderDetails',['orderId'=>$order->id])}}" class="btn btn-secondary">Details</a>
                                     </td>
                                 </tr>
                             @endforeach

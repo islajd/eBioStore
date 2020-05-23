@@ -14,7 +14,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="/category/save">
+                <form method="POST" action="{{route('saveCategory')}}">
                     <div class="modal-body">
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -63,7 +63,7 @@
                                 <tr>
                                     <td>{{ $category->name }}</td>
                                     <td>
-                                        <form action="/category/{{ $category->id }}/delete" method="POST">
+                                        <form action="{{route('deleteCategory',['id'=>$category->id])}}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" class="btn btn-danger">DELETE</button>

@@ -18,7 +18,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active in" id="profileDetails">
-                <form method="POST" action="user/edit">
+                <form method="POST" action="{{route('editUser')}}">
                     {{ csrf_field() }}
                     <br>
                     <label>First Name</label>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="tab-pane fade" id="password">
-                <form action="user/changePassword" method="POST">
+                <form action="{{route('changePassword')}}" method="POST">
                     {{ csrf_field() }}
                     <br>
                     <label>Old Password</label>
@@ -53,7 +53,7 @@
                     <label>New Password</label>
                     <input type="password" class="input-xlarge" name="new_password">
                     <br>
-                    <label>Confrim Password</label>
+                    <label>Confirm Password</label>
                     <input type="password" class="input-xlarge" name="confirm_password">
                     <div>
                         <button class="btn btn-primary" type="submit">Change Password</button>

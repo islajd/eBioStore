@@ -12,7 +12,7 @@
         <br>
         <div class="row justify-content-center">
             <div class="col-xl-7">
-                <form method="post" action="support/sendRequest">
+                <form method="post" action="{{route('sendSupportRequest')}}">
                     {{ csrf_field() }}
                     <div class="row align-items-end">
                         <div class="col-md-6">

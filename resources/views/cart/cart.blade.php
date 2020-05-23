@@ -28,7 +28,7 @@
                         @foreach($products as $product)
                             <tr class="text-center">
                                 <td>
-                                    <form action="cart/delete/{{ $product->product_id }}/product" method="POST">
+                                    <form action="{{route('deleteProductAtCart',['productId'=>$product->product_id])}}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type="submit" class="btn btn-danger">X</button>
@@ -45,7 +45,7 @@
                                 <td>${{$product->price}}/{{$product->measurement_name}}</td>
 
                                 <td>
-                                    <form method="POST" action="cart/{{$product->product_id}}/changeAmount">
+                                    <form method="POST" action="{{route('changeAmountCart',['productId'=>$product->product_id])}}">
                                         {{ csrf_field() }}
                                         <div class="input-group mb-3">
                                             <input type="number" step='0.1' value="{{$product->quantity}}" name="amount" class="quantity form-control input-number" max="{{$product->stock}}" min="1" style="width: 10px">
@@ -73,13 +73,13 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <form method="GET" action="checkout">
+                        <form method="GET" action="{{route('Checkout')}}">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-primary py-3 px-4">Proceed To Checkout</button>
                         </form>
                     </div>
                     <div class="col-md-4">
-                        <form method="POST" action="cart/empty">
+                        <form method="POST" action="{{route('emptyCart')}}">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger py-3 px-4">Empty Cart</button>
                         </form>

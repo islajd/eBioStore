@@ -9,7 +9,7 @@
                         <img class="d-block w-100" src="{{ asset('/storage/product_images/'.$product->image) }}" alt="Product">
                     </div>
                     <div class="col-md-7 p-5">
-                        <form action="/cart/addToCart/{{$product->product_id}}" method="POST">
+                        <form action="{{route('addToCart',['productId'=>$product->product_id])}}" method="POST">
                             {{ csrf_field() }}
                             <div class="row">
                                 <h3 style="color: #1c7430;"> {{$product->name}}</h3>

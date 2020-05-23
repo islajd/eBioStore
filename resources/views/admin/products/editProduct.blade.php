@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> Edit Product </h4>
-                    <form method="POST" action="{{ url('product/'.$product->id.'/update') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{route('updateProduct',["id"=>$product->id])}}" enctype="multipart/form-data">
                         <div class="modal-body">
 
                             {{ csrf_field() }}
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a href=" {{ url('products') }}" class="btn btn-secondary">Back</a>
+                            <a href=" {{ route('Products') }}" class="btn btn-secondary">Back</a>
                             <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>

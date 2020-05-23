@@ -48,7 +48,7 @@ class PaymentController extends Controller
         $transaction->setAmount($amount);
 
         $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::to('status'))->setCancelUrl(URL::to('status'));
+        $redirect_urls->setReturnUrl(URL::to('Status'))->setCancelUrl(URL::to('Status'));
 
         $payment = new Payment();
         $payment->setIntent('Sale')

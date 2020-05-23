@@ -35,25 +35,25 @@
         <div class="sidebar-wrapper" id="sidebar-wrapper">
             <ul class="nav">
                 <li class=" {{ 'users' == request()->path() ? 'active': '' }} ">
-                    <a href="/users">
+                    <a href="{{route('Users')}}">
                         <i class="now-ui-icons users_single-02"></i>
                         <p>Users</p>
                     </a>
                 </li>
                 <li class=" {{ 'products' == request()->path() ? 'active': '' }} ">
-                    <a href="/products">
+                    <a href="{{route('Products')}}">
                         <i class="now-ui-icons design_app"></i>
                         <p>Products</p>
                     </a>
                 </li>
                 <li class=" {{ 'categories' == request()->path() ? 'active': '' }} ">
-                    <a href="/categories">
+                    <a href="{{route('Categories')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
                         <p>Categories</p>
                     </a>
                 </li>
                 <li class=" {{ 'orders' == request()->path() ? 'active': '' }} ">
-                    <a href="/orders">
+                    <a href="{{route('Orders')}}">
                         <i class="now-ui-icons design_bullet-list-67"></i>
                         <p>Orders</p>
                     </a>
