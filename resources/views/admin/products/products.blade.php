@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Stock:</label>
-                            <input type="number" step="0.01" name="stock" class="form-control" id="recipient-name">
+                            <input type="number" step="0.01" name="stock" class="form-control" id="recipient-name" required>
                             <select name="measurement_type" class="form-control" style="display: inline-block">
                                 @foreach($measurement_types as $measurement_type)
                                     <option value="{{ $measurement_type->id }}">{{ $measurement_type->name }}</option>
