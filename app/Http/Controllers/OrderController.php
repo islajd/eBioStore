@@ -88,10 +88,10 @@ class OrderController extends Controller
             ]);
         }
         catch (QueryException $e){
-            return "Something went wrong";
+            return redirect('profile')->with('error','Something went wrong');
         }
         catch (ModelNotFoundException $e){
-            return "Something went wrong";
+            return redirect('profile')->with('error','Something went wrong');
         }
     }
 
@@ -135,10 +135,10 @@ class OrderController extends Controller
             ]);
         }
         catch (QueryException $e){
-            return "Something went wrong";
+            return back()->with('error','Something went wrong');
         }
         catch (ModelNotFoundException $e){
-            return "Something went wrong";
+            return back()->with('error','Something went wrong');
         }
     }
 
@@ -155,7 +155,7 @@ class OrderController extends Controller
             return redirect('orders')->with('status',"Status Changed");
         }
         catch (ModelNotFoundException $e){
-
+            return back();
         }
     }
 }

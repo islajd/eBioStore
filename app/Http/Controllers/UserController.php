@@ -37,7 +37,7 @@ class UserController extends Controller
 
     public function changeDetails(Request $request){
         if(!$request->has(['email','first_name','last_name','phone_number','address'])){
-            return "Something went wrong";
+            return redirect('profile')->with('status','Something Went Wrong');
         }
         try{
             $userId = Auth::user()->id;
@@ -54,13 +54,13 @@ class UserController extends Controller
             return redirect('profile')->with('status','User not found');
         }
         catch (QueryException $e){
-            return redirect('profile')->with('status','Fields cannot be null');
+            return redirect('profile')->with('error','Something went wrong');
         }
     }
 
     public function changePassword(Request $request){
         if(!$request->has(['old_password','new_password','confirm_password'])){
-            return redirect('getProfile')->with('status','Something Went Wrong');
+            return redirect('profile')->with('error','Something Went Wrong');
         }
         try{
             $userId = Auth::user()->id;
